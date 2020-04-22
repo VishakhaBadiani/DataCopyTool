@@ -207,8 +207,27 @@ public class CopyService {
                     jobDetailsList.add(jobDetails);
                 }}
         }catch(IOException e){
-            throw new RuntimeException("Failed when reading the file. Please contact admin", e);
+            throw new RuntimeException("Failed when reading the file.", e);
         }
         return jobDetailsList;
+    }
+
+    public List<String> getValues(String key){
+        String value;
+        String valueSeperated[];
+        List<String> valueList= new ArrayList<>();
+        Properties configProp = new Properties();
+        InputStream in = this.getClass().getClassLoader().getResourceAsStream("application.properties");
+        try {
+            configProp.load(in);
+            value = configProp.getProperty(key);
+            valueSeperated=value.split(",");
+            for(String s: valueSeperated){
+                valueList.add(s);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Failed when fetching values from property file.", e);
+        }
+        return valueList;
     }
 }
