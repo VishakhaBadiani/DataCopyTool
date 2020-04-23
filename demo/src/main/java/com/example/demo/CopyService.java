@@ -12,6 +12,7 @@ import java.util.*;
 public class CopyService {
 
     String excelFilePath = "D:\\Vishakha\\Job_Details.xlsx";
+    String dmpFilePath = "D:\\Vishakha\\Files\\";
     Workbook wb;
     Properties configProp = new Properties();
     InputStream in = this.getClass().getClassLoader().getResourceAsStream("application.properties");
@@ -233,5 +234,14 @@ public class CopyService {
             throw new RuntimeException("Failed when fetching values from property file.", e);
         }
         return valueList;
+    }
+
+    public void deleteFile(int jobId){
+        File myObj = new File(dmpFilePath+jobId+".dmp");
+        if (myObj.delete()) {
+            System.out.println("Deleted the dmp file: " + myObj.getName());
+        } else {
+            System.out.println("Failed to delete the file.");
+        }
     }
 }

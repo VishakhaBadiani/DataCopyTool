@@ -67,6 +67,7 @@ public class CopyController {
             copyService.importData(jobDetails.getToSchName(), jobDetails.getToPWD(), jobDetails.getToDB(), jobId);
             conToDb.close();
             CryptoUtils.encrypt(key, inputFile, encryptedFile);
+            copyService.deleteFile(jobId);
             now=LocalDateTime.now();
             System.out.println("End time - "+dtf.format(now));
             return ResponseEntity.status(HttpStatus.OK).body("true");
