@@ -9,7 +9,9 @@ var gtPWD;
 var gtDB;
 
 $(document).ready(function(){
-
+    console.log('document is loaded');
+       
+    
     $('#headingTwo').click(function(){
         $('#collapseTwo').toggle();
     });
@@ -41,34 +43,42 @@ $(document).ready(function(){
         var fSName= $('#fSName').val();
         var pwd=$('#fPWD').val();
         var fDBName=$('#fDBName').val();
+        gfSName = fSName;
+        gfPWD = pwd;
+        gfDB = fDBName;
 
         if(validateF(fDBName,fSName,pwd)){
+            
+            console.log({usr:fSName,pass:pwd,dbn:fDBName});
+            $.post('/authDB',{usr:fSName,pass:pwd,dbn:fDBName,DbType:"source"})
+            .done(function(response){
+                console.log(response);
 
-            if(pwd=='abc12345'){
-
-                fAuthFlag=true;
-                gfSName=fSName;
-                gfPWD=pwd;
-                gfDB=fDBName;
-                alert('Successfully Validated!');
-
-            } else{
-                alert('Please enter correct credentials!!');
-            }
-
-            if(fAuthFlag==true && tAuthFlag==true){
-
+                if (response == "false"){
+                    //alert("Better luck next time!");
+                    alert("Source DB: Better luck next time!");
+                }
+                else {
+                    fAuthFlag= true;
+                    if (fAuthFlag) {
+                        console.log("line: 60 fAuthFlag is True");
+                    }
+                    alert("Welcome! You are authenticated to Source DB.");
+                }
+                console.log("Checking at line 64");
+            if(fAuthFlag && tAuthFlag){
+                console.log("Checking at line 66");
                 $('#collapseOne').hide();
-
-
-            }
-            if(fAuthFlag==true && tAuthFlag==true){
-
                 $('#part').hide();
                 $('#Qry').hide();
+                loadTableList();
                 $('#collapseTwo').show();
-
             }
+
+            })
+            .fail( function(xhr, textStatus, errorThrown) {
+                alert("Sorce DB Connect Failed! "+xhr.responseText);
+            });
 
             document.getElementById("fPWD").value='';
         }
@@ -80,34 +90,62 @@ $(document).ready(function(){
         var tSName= $('#tSName').val();
         var pwd=$('#tPWD').val();
         var tDBName=$('#tDBName').val();
-
+        gtSName = tSName;
+        gtPWD = pwd;
+        gtDB = tDBName;
         if(validateF(tDBName,tSName,pwd)){
+            console.log({usr:tSName,pass:pwd,dbn:tDBName});
+            $.post('/authDB',{usr:tSName,pass:pwd,dbn:tDBName,DbType:"target"})
+            .done(function(response){
+                console.log(response);
 
-            if(pwd=='abc12345'){
-
-                tAuthFlag=true;
-                gtSName=tSName;
-                gtPWD=pwd;
-                gtDB=tDBName;
-                alert('Successfully Validated!');
+                if (response == "false"){
+                    //alert("Better luck next time!");
+                     alert("Better luck next time!");
+                }
+                else {
+                    tAuthFlag= true;
+                    if (fAuthFlag) {
+                        console.log("line: 108 fAuthFlag is True");
+                    }
+                    if (tAuthFlag) {
+                        console.log("line: 111 tAuthFlag is True");
+                    }
+                    alert("Welcome! You are authenticated to Target DB.");
+                }
+                console.log("Checking at line 109");
+                if(fAuthFlag && tAuthFlag){
+                    console.log("Checking at line 111");
+                    $('#collapseOne').hide();
+                    $('#part').hide();
+                    $('#Qry').hide();
+                    $('#collapseTwo').show();
+                    loadTableList();
             }
-            else{
-                alert('Please enter correct credentials!!');
-            }
-            if(fAuthFlag==true && tAuthFlag==true){
+            })
+            .fail( function(xhr, textStatus, errorThrown) {
+                alert("Target DB Connect Failed! "+xhr.responseText);
+            });
 
-                $('#collapseOne').hide();
-                $('#part').hide();
-                $('#Qry').hide();
-                $('#collapseTwo').show();
 
-            }
             document.getElementById("tPWD").value='';
 
         }
 
     });
 
+
+    $('#collapseTwo').show(function(){
+        loadTableList();
+    });
+
+    $('#copyType').click(function(){
+        loadPartition();
+    });
+
+    $('#tableName').click(function(){
+        loadPartition();
+    });
 
     $('#sub').click(function(){
 
@@ -230,3 +268,127 @@ function validateF(fDBName,fSName,pwd){
     return true;
 
 }
+
+function loadOptions(){
+        console.log('fsname drop down');
+        $('#collapseTwo').hide();
+        $('#fSName').empty();
+        $.ajax({
+         type: 'GET',
+         url: '/getSchName',
+         //contentType: 'application/json',
+         success : function(data){
+             console.log(data);
+            // var res = $.parseJSON(data);
+            $('#fSName').append("<option value='' selected>--Select--</option>");
+             $.each(data, function(index, value){
+                 console.log(value);
+                 $('#fSName').append("<option value='" + value + "'>"+value+"</option>");
+             });
+         },
+         error: function(){alert("fSName: Option details not avaialble!");}
+        }) ;
+
+        console.log('tSName drop down');
+        $('#tSName').empty();
+        $.ajax({
+         type: 'GET',
+         url: '/getSchName',
+         //contentType: 'application/json',
+         success : function(data){
+             console.log(data);
+            // var res = $.parseJSON(data);
+            $('#tSName').append("<option value='' selected>--Select--</option>");
+             $.each(data, function(index, value){
+                 console.log(value);
+                 $('#tSName').append("<option value='" + value + "'>"+value+"</option>");
+             });
+         },
+         error: function(){alert("tSName: Option details not avaialble!");}
+        }) ;
+
+        console.log('fDBName drop down');
+        $('#fDBName').empty();
+        $.ajax({
+         type: 'GET',
+         url: '/getSrcDBName',
+         //contentType: 'application/json',
+         success : function(data){
+             console.log(data);
+            // var res = $.parseJSON(data);
+            $('#fDBName').append("<option value='' selected>--Select--</option>");
+             $.each(data, function(index, value){
+                 console.log(value);
+                 $('#fDBName').append("<option value='" + value + "'>"+value+"</option>");
+             });
+         },
+         error: function(){alert("fDBName: Option details not avaialble!");}
+        }) ;
+
+        console.log('tDBName drop down');
+        $('#tDBName').empty();
+        $.ajax({
+         type: 'GET',
+         url: '/getSrcDBName',
+         //contentType: 'application/json',
+         success : function(data){
+             console.log(data);
+            // var res = $.parseJSON(data);
+            $('#tDBName').append("<option value='' selected>--Select--</option>");
+             $.each(data, function(index, value){
+                 console.log(value);
+                 $('#tDBName').append("<option value='" + value + "'>"+value+"</option>");
+             });
+         },
+         error: function(){alert("tDBName: Option details not avaialble!");}
+        }) ;
+return true;
+}
+
+function loadPartition(){
+    if ($('#copyType').val() == 'PC'){
+        console.log('Partition drop down');
+        $('#Partition').empty();
+        l_url = "/getPartName/" + $('#tableName').val();
+        console.log("The partion for url : " + l_url);
+
+        $.ajax({
+        type: 'GET',
+        url: l_url,
+        //contentType: 'application/json',
+        success : function(data){
+            console.log(data);
+            // var res = $.parseJSON(data);
+            $('#Partition').append("<option value='' selected>--Select--</option>");
+            $.each(data, function(index, value){
+                console.log(value);
+                $('#Partition').append("<option value='" + value + "'>"+value+"</option>");
+            });
+        },
+        error: function(){alert("Partition: Option details not avaialble!");}
+        }) ;
+    return true;
+    }
+}
+
+function loadTableList(){
+        console.log('tableName drop down');
+        $('#tableName').empty();
+        if (gfSName != '' && gfSName != undefined){
+            console.log('tableName inside if block');
+                $.ajax({
+                type: 'GET',
+                url: '/getTabName',
+                success : function(data){
+                    console.log(data);
+
+                    $('#tableName').append("<option value='' selected>--Select--</option>");
+                    $.each(data, function(index, value){
+                        console.log(value);
+                        $('#tableName').append("<option value='" + value + "'>"+value+"</option>");
+                    });
+                },
+                error: function(){alert("tableName: Option details not avaialble!");}
+                }) ;
+            }
+    }

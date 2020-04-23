@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.File;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -18,7 +19,13 @@ import java.util.List;
 @RestController
 @Component
 public class CopyController {
+    String key = "Mary has one cat";
+    File inputFile;
+    File encryptedFile;
+    File decryptedFile;
+
     Connection conFromDb, conToDb;
+    String fromUser;
 
     @Autowired
     CopyService copyService;
@@ -50,12 +57,21 @@ public class CopyController {
         int jobId;
         try {
             jobId = copyService.writeToFile(jobDetails.getFromDB(), jobDetails.getFromSchName(), jobDetails.getToDB(), jobDetails.getToSchName(), jobDetails.getTableName(), jobDetails.getCopyType());
+            inputFile = new File("D:\\Vishakha\\Files\\"+jobId+".dmp");
+            encryptedFile = new File("D:\\Vishakha\\Files\\"+jobId+".encrypted");
+            decryptedFile = new File("D:\\Vishakha\\Files\\"+jobId+".decrypted");
             copyService.export(jobDetails.getFromSchName(), jobDetails.getFromPWD(), jobDetails.getFromDB(), jobDetails.getTableName(), jobId, jobDetails.getCopyType(), jobDetails.getPartition(), jobDetails.getTextArea());
             conFromDb.close();
+            /*CryptoUtils.encrypt(key, inputFile, encryptedFile);
+            CryptoUtils.decrypt(key, encryptedFile, decryptedFile);*/
             copyService.importData(jobDetails.getToSchName(), jobDetails.getToPWD(), jobDetails.getToDB(), jobId);
+            conToDb.close();
+            CryptoUtils.encrypt(key, inputFile, encryptedFile);
             now=LocalDateTime.now();
             System.out.println("End time - "+dtf.format(now));
             return ResponseEntity.status(HttpStatus.OK).body("true");
+        }catch (CryptoException e){
+            return ResponseEntity.status(HttpStatus.OK).body(ExceptionUtils.getStackTrace(e));
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.OK).body(ExceptionUtils.getStackTrace(e));
         }
@@ -84,11 +100,11 @@ public class CopyController {
     }
 
     @GetMapping(value="/getTabName", produces = "application/json")
-    public ResponseEntity<List<String>> getAllTables(@PathVariable("user") String user){
+    public ResponseEntity<List<String>> getAllTables(){
         List<String> tabList = new ArrayList<String>();
         try{
             Statement st = conFromDb.createStatement();
-            ResultSet rs = st.executeQuery("select table_name from all_tables where owner='"+user.toUpperCase()+"'");
+            ResultSet rs = st.executeQuery("select table_name from all_tables where owner='"+fromUser.toUpperCase()+"'");
             while(rs.next()){
                 tabList.add(rs.getString(1));
             }
@@ -99,11 +115,11 @@ public class CopyController {
     }
 
     @RequestMapping(value="/getPartName/{table}", method = RequestMethod.GET)
-    public ResponseEntity<List<String>> getAllParts(@PathVariable("table") String table, @PathVariable("user") String user) {
+    public ResponseEntity<List<String>> getAllParts(@PathVariable("table") String table) {
         List<String> partList = new ArrayList<String>();
         try{
             Statement st = conFromDb.createStatement();
-            ResultSet rs = st.executeQuery("select distinct partition_name from all_tab_partitions where table_name='"+table.toUpperCase()+"' and table_owner='"+user.toUpperCase()+"'");
+            ResultSet rs = st.executeQuery("select distinct partition_name from all_tab_partitions where table_name='"+table.toUpperCase()+"' and table_owner='"+fromUser.toUpperCase()+"'");
             while(rs.next()){
                 partList.add(rs.getString(1));
             }
@@ -113,10 +129,12 @@ public class CopyController {
         }
     }
 
-    @PostMapping(path = "/authDB", consumes = "application/text")
+    @RequestMapping(value = "/authDB", method = RequestMethod.POST)
+    @ResponseBody
     public ResponseEntity<String> authDB(@RequestParam("usr") String user, @RequestParam("pass") String pass,
-                                         @RequestParam("dbname") String dbn, @RequestParam("DbType") String dbType) {
-        try {
+                                         @RequestParam("dbn") String dbn, @RequestParam("DbType") String dbType){
+        try{
+            fromUser=user;
             String url = "jdbc:oracle:thin:@localhost:1521:"+dbn;
             List<String> tableNamesList = null;
             Class.forName("oracle.jdbc.driver.OracleDriver");

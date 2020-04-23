@@ -13,15 +13,15 @@
     <title>Data Copy Tool!</title>
 
   </head>
-  <body>
+  <body onload="loadOptions()">
 
-              <!--  -->
+              <!--  
               <div class="header">
 
               </div>
 
 
-              <!--  -->
+              -->
              <div id="tabdiv">
               <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item">
@@ -32,6 +32,9 @@
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" id="manual-tab" data-toggle="tab" href="#manual" role="tab" aria-controls="contact" aria-selected="false">User-Manual</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="synthetic-tab" data-toggle="tab" href="#synthetic" role="tab" aria-controls="synthetic" aria-selected="false">Synthetic Data Creation</a>
                 </li>
               </ul>
             </div>
@@ -76,9 +79,9 @@
                                 <td>
                                   <select id="fDBName" class="DBdropdown">
                                     <option value="">---Select---</option>
-                                    <option value="IEDB_UAT">IEDB_UAT</option>
+                             <!--       <option value="IEDB_UAT">IEDB_UAT</option>
                                     <option value="IEDB_DEV">IEDB_DEV</option>
-
+                                -->
                                   </select>
                                 </td>
                                 <td></td>
@@ -87,21 +90,17 @@
                                   <td>
                                     <select id="tDBName" class="DBdropdown">
                                       <option value="">---Select---</option>
-                                      <option value="IEDB_UAT">IEDB_UAT</option>
+                                    <!--  <option value="IEDB_UAT">IEDB_UAT</option>
                                       <option value="IEDB_DEV">IEDB_DEV</option>
-
+                                      -->
                                     </select>
                                   </td>
                               </tr>
                               <tr>
                                 <td scope="row">Schema Name</td>
                                 <td>
-                                  <select id="fSName" class="DBdropdown">
+                                  <select id="fSName" class="DBdropdown1" >
                                     <option value="">---Select---</option>
-                                    <option value="trd">TRD</option>
-                                    <option value="covid">COVID</option>
-                                    <option value="hack">HACK</option>
-
                                   </select>
                                 </td>
                                 <td></td>
@@ -110,10 +109,10 @@
                                   <td>
                                     <select id="tSName" class="DBdropdown">
                                       <option value="">---Select---</option>
-                                    <option value="trd">TRD</option>
+                               <!--     <option value="trd">TRD</option>
                                     <option value="covid">COVID</option>
                                     <option value="hack">HACK</option>
-
+                               -->
                                     </select>
                                   </td>
                               </tr>
@@ -161,11 +160,12 @@
                             <td>Table Name</td>
                             <td><select id="tableName" class="DBdropdown">
                               <option value="">--Select--</option>
-                                    <option value="Customers">Customers</option>
+                              <!--      <option value="Customers">Customers</option>
                                     <option value="Trades">Trades</option>
                                     <option value="Job_Details">Job_Details</option>
                                     <option value="Transaction">Transaction</option>
                                     <option value="Trades_10m">Trades_10m</option>
+                              -->
                             </select>  </td>
                             <td></td>
                             <td></td>
@@ -188,10 +188,11 @@
                             <td>
                               <select id="Partition" class="DBdropdown">
                                 <option value="">---Select---</option>
-                                <option value="P1">P1</option>
+                           <!--     <option value="P1">P1</option>
                                 <option value="P2">P2</option>
                                 <option value="P3">P3</option>
                                 <option value="P_Default">P_Default</option>
+                            -->
                               </select>
 
                             </td>
@@ -267,7 +268,7 @@
 
                     </div><!--dashboard  -->
                     <div class="tab-pane fade" id="manual" role="tabpanel" aria-labelledby="manual-tab">
-                      <table class="table">
+                      <table class="table" id="manualTable">
                         <thead class="thead-light">
                           <tr>
                             <td scope="col" style="font-size: 15px;">Click on the link to download <a  href="download.jsp" style="color: rgb(57, 132, 182);" >User-Manual</a></td>
@@ -279,6 +280,22 @@
                       </table>
 
                     </div><!--manual  -->
+
+                    <div class="tab-pane fade" id="synthetic" role="tabpanel" aria-labelledby="synthetic-tab">
+                      <div class="jumbotron jumbotron-fluid">
+                        <div class="container">
+                          <h1 class="display-4">Synthetic Data Creation</h1>
+                          <p class="lead"><font color=black size=+2><b>Hello</b></font>,<br>
+                            Our Engineers are <b>working hard</b> and </b>brainstorming harder</b> to bring up this feature.
+                            <br>As we all know "<I><U>Rome was not built in a day</U></I>", thus our brilliant team of <font color=purple><b>developers and testers</b></font>
+                            require some time to create the<font color= blue size=+1> <b>Magic Tool</b></font>.
+                            Till then <strong>keep patience, Stay @Home and cheer the team</strong>.
+                          </p>
+                        </div>
+                      </div>
+                    </div>  <!--Synthetic Data Creation  -->
+
+
 
     </div>
 

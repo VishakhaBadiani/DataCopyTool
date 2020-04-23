@@ -13,6 +13,9 @@ public class CopyService {
 
     String excelFilePath = "D:\\Vishakha\\Job_Details.xlsx";
     Workbook wb;
+    Properties configProp = new Properties();
+    InputStream in = this.getClass().getClassLoader().getResourceAsStream("application.properties");
+    String value;
 
     public Integer writeToFile(String fromDB, String fromSchName, String toDB, String toSchName, String tableName, String copyType){
         int jobId=0;
@@ -52,16 +55,18 @@ public class CopyService {
         }
         return jobId;
     }
-    public void export(String user, String password, String fromDb, String tableName, int jobId, String copyType, String partition, String textArea) throws FileNotFoundException {
+    public void export(String user, String password, String fromDb, String tableName, int jobId, String copyType, String partition, String textArea) throws IOException {
+        configProp.load(in);
+        value = configProp.getProperty(fromDb);
         System.out.println("Copying Table - "+tableName +"for copyType - "+copyType);
         Process p = null;
         ProcessBuilder builder1 = null;
         if(copyType.equalsIgnoreCase("TC")){
             builder1 = new ProcessBuilder("D:\\app\\Vishakha\\product\\11.2.0\\dbhome_1\\BIN\\exp",
-                    user+"/"+user+"@"+fromDb, "tables="+tableName, "file="+jobId+".dmp", "direct=y", "log="+jobId+"_export.txt");
+                    user+"/"+user+"@"+value, "tables="+tableName, "file="+jobId+".dmp", "direct=y", "log="+jobId+"_export.txt");
         }else if(copyType.equalsIgnoreCase("PC")){
             builder1 = new ProcessBuilder("D:\\app\\Vishakha\\product\\11.2.0\\dbhome_1\\BIN\\exp",
-                    user+"/"+user+"@"+fromDb, "tables="+tableName+":"+partition, "file="+jobId+".dmp", "direct=y", "log="+jobId+"_export.txt");
+                    user+"/"+user+"@"+value, "tables="+tableName+":"+partition, "file="+jobId+".dmp", "direct=y", "log="+jobId+"_export.txt");
         }else if(copyType.equalsIgnoreCase("CC")){
             Formatter x= new Formatter("D:\\Vishakha\\Files\\copy.par");
             x.format("tables="+tableName);
@@ -70,7 +75,7 @@ public class CopyService {
             x.format(" query="+textArea);
             x.close();
             builder1 = new ProcessBuilder("D:\\app\\Vishakha\\product\\11.2.0\\dbhome_1\\BIN\\exp",
-                    user+"/"+user+"@"+fromDb, "parfile=copy.par");
+                    user+"/"+user+"@"+value, "parfile=copy.par");
         }
         builder1.directory(new File("D:\\Vishakha\\Files\\"));
         builder1.environment().put("ORACLE_HOME", "D:\\app\\Vishakha\\product\\11.2.0\\dbhome_1");
@@ -108,12 +113,14 @@ public class CopyService {
 
     public void importData(String toSch, String toPwd, String toDB, int jobId){
         try{
+            configProp.load(in);
+            value = configProp.getProperty(toDB);
             wb = WorkbookFactory.create(new FileInputStream(excelFilePath));
             Sheet firstSheet = wb.getSheetAt(0);
             Cell cell3 = firstSheet.getRow(jobId).getCell(11);
             Cell cell = firstSheet.getRow(jobId).getCell(9);
             Process p = null;
-            ProcessBuilder builder1 = new ProcessBuilder("D:\\app\\Vishakha\\product\\11.2.0\\dbhome_1\\BIN\\imp", toSch+"/"+toSch+"@"+toDB, "file="+jobId+".dmp",
+            ProcessBuilder builder1 = new ProcessBuilder("D:\\app\\Vishakha\\product\\11.2.0\\dbhome_1\\BIN\\imp", toSch+"/"+toSch+"@"+value, "file="+jobId+".dmp",
                     "full=y", "log="+jobId+"_import.txt", "ignore=y");
             builder1.directory(new File("D:\\Vishakha\\Files\\"));
             builder1.environment().put("ORACLE_HOME", "D:\\app\\Vishakha\\product\\11.2.0\\dbhome_1");
@@ -213,11 +220,8 @@ public class CopyService {
     }
 
     public List<String> getValues(String key){
-        String value;
         String valueSeperated[];
         List<String> valueList= new ArrayList<>();
-        Properties configProp = new Properties();
-        InputStream in = this.getClass().getClassLoader().getResourceAsStream("application.properties");
         try {
             configProp.load(in);
             value = configProp.getProperty(key);
