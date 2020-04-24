@@ -102,7 +102,7 @@ public class CopyService {
                     message=message+"...."+line;
                 }else if(line.contains("unsuccessfully") || line.contains("unknown parameter name") || line.contains("ORA-")){
                     message=message+"...."+line;
-                    cell3.setCellValue("Export Failed");
+                    cell3.setCellValue("Failed");
                     cell4.setCellValue("Import did not happen as export failed");
                 }
             }
@@ -146,7 +146,7 @@ public class CopyService {
                 }
                 else if(line.contains("failed") || line.contains("Unable to set values for column")|| line.contains("ORA-")){
                     message=message+"...."+line;
-                    cell.setCellValue("Import Failed");
+                    cell.setCellValue("Failed");
                 }
             }
             cell3.setCellValue(message);
