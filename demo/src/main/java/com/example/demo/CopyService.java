@@ -17,6 +17,7 @@ public class CopyService {
     Properties configProp = new Properties();
     InputStream in = this.getClass().getClassLoader().getResourceAsStream("application.properties");
     String value;
+    String message;
 
     public Integer writeToFile(String fromDB, String fromSchName, String toDB, String toSchName, String tableName, String copyType){
         int jobId=0;
@@ -88,20 +89,24 @@ public class CopyService {
             Sheet firstSheet = wb.getSheetAt(0);
             Cell cell3 = firstSheet.getRow(jobId).getCell(9);
             Cell cell = firstSheet.getRow(jobId).getCell(10);
+            Cell cell4 = firstSheet.getRow(jobId).getCell(11);
             p = builder1.start();
             BufferedReader r = new BufferedReader(new InputStreamReader(p.getInputStream()));
             String line;
+            message="Exporting Data...";
             while (true) {
                 line = r.readLine();
                 if (line == null) { break; }
                 System.out.println(line);
                 if(line.contains("exported")){
-                    cell.setCellValue(line);
-                }else if(line.contains("unsuccessfully")){
-                    cell.setCellValue(line);
-                    cell3.setCellValue("Failed");
+                    message=message+"...."+line;
+                }else if(line.contains("unsuccessfully") || line.contains("unknown parameter name") || line.contains("ORA-")){
+                    message=message+"...."+line;
+                    cell3.setCellValue("Export Failed");
+                    cell4.setCellValue("Import did not happen as export failed");
                 }
             }
+            cell.setCellValue(message);
             Cell cell2 = firstSheet.getRow(jobId).getCell(8);
             cell2.setCellValue(new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date()));
             FileOutputStream fileOut = new FileOutputStream(excelFilePath);
@@ -130,19 +135,21 @@ public class CopyService {
             p = builder1.start();
             BufferedReader r = new BufferedReader(new InputStreamReader(p.getInputStream()));
             String line;
+            message="Importing Data...";
             while (true) {
                 line = r.readLine();
                 if (line == null) { break; }
                 System.out.println(line);
                 if(line.contains("imported")){
-                    cell3.setCellValue(line);
+                    message=message+"...."+line;
                     cell.setCellValue("Completed");
                 }
-                else if(line.contains("failed")){
-                    cell3.setCellValue(line);
-                    cell.setCellValue("Failed");
+                else if(line.contains("failed") || line.contains("Unable to set values for column")|| line.contains("ORA-")){
+                    message=message+"...."+line;
+                    cell.setCellValue("Import Failed");
                 }
             }
+            cell3.setCellValue(message);
             Cell cell2 = firstSheet.getRow(jobId).getCell(8);
             cell2.setCellValue(new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date()));
             FileOutputStream fileOut = new FileOutputStream(excelFilePath);
