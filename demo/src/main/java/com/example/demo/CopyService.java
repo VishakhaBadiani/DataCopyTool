@@ -1,6 +1,5 @@
 package com.example.demo;
 
-import model.JobDetails;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.stereotype.Component;
 

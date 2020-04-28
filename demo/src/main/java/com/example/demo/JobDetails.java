@@ -1,4 +1,4 @@
-package model;
+package com.example.demo;
 
 public class JobDetails {
 

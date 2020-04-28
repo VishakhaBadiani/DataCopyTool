@@ -55,7 +55,7 @@ public class DemoApplicationTests {
 
 	@Test
 	public void positiveReadFromFileTest() throws ParseException {
-		model.JobDetails jobDetails = (model.JobDetails) copyService.readFromFile();
+		JobDetails jobDetails = (JobDetails) copyService.readFromFile();
 		assertNotNull(jobDetails);
 	}
 
