@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @Component
@@ -24,7 +25,7 @@ public class CopyController {
     File decryptedFile;
 
     Connection conFromDb, conToDb, connThrough;
-    String fromUser, connThroughUser;
+    String fromUser, connThroughUser, connectThroughDb;
 
     @Autowired
     CopyService copyService;
@@ -119,7 +120,7 @@ public class CopyController {
     public ResponseEntity<List<String>> getAllTables(@PathVariable("usr") String usr){
         List<String> tabList = new ArrayList<String>();
         try{
-            Statement st = conFromDb.createStatement();
+            Statement st = connThrough.createStatement();
             ResultSet rs = st.executeQuery("select table_name from all_tables where owner='"+usr.toUpperCase()+"'");
             while(rs.next()){
                 tabList.add(rs.getString(1));
@@ -160,6 +161,7 @@ public class CopyController {
             }else if(dbType.equalsIgnoreCase("target")){
                 conToDb = DriverManager.getConnection(url,user,pass);
             }else if(dbType.equalsIgnoreCase("user")){
+                connectThroughDb=dbn;
                 connThrough = DriverManager.getConnection(url,user,pass);
                 connThroughUser = user.substring(user.indexOf("[")+1).split("]")[0];
             }
@@ -174,8 +176,37 @@ public class CopyController {
     public ResponseEntity<List<String>> getAllGrantSchemaList() {
         List<String> grantedSchemaList = new ArrayList<String>();
         try{
-            Statement st = conFromDb.createStatement();
-            ResultSet rs = st.executeQuery("select distinct grantor from all_tab_privs where grantee='"+fromUser.toUpperCase()+"'");
+            Statement st = connThrough.createStatement();
+            ResultSet rs = st.executeQuery("select distinct grantor from all_tab_privs where grantee='"+connThroughUser.toUpperCase()+"'");
+            /*ResultSet rs1 = st.executeQuery("DELETE FROM PLAN_TABLE");
+            int rs2 = st.executeUpdate("BEGIN EXECUTE IMMEDIATE 'select * from job_details'; END;");
+            String sql = "DELETE FROM PLAN_TABLE; " +
+                    " BEGIN EXECUTE IMMEDIATE 'select * from job_details'; END; " +
+                    " SELECT    'SELECT DISTINCT ' || OBJECT_ALIAS || '.* FROM ' || (SELECT LISTAGG (ojn.OBJECT_NAME || ' ' || ojn.OBJECT_ALIAS, ', ') WITHIN GROUP (ORDER BY ojn.OBJECT_NAME || ' ' || ojn.OBJECT_ALIAS) FROM OBJ_NAME ojn)\n" +
+                    "       || CASE WHEN (SELECT DISTINCT LISTAGG (REPLACE (NVL (ACCESS_PREDICATES, FILTER_PREDICATES),'\"',NULL), ' AND ') WITHIN GROUP (ORDER BY NVL (ACCESS_PREDICATES, FILTER_PREDICATES)) FROM PLAN_TABLE\n" +
+                    "                     WHERE NVL (ACCESS_PREDICATES, FILTER_PREDICATES) IS NOT NULL) IS NOT NULL\n" +
+                    "              THEN\n" +
+                    "                     ' WHERE ' || REPLACE((SELECT DISTINCT LISTAGG (REPLACE ( NVL (ACCESS_PREDICATES, FILTER_PREDICATES), '\"', NULL), ' AND ') WITHIN GROUP (ORDER BY NVL (ACCESS_PREDICATES, FILTER_PREDICATES))\n" +
+                    "                        FROM PLAN_TABLE WHERE NVL (ACCESS_PREDICATES, FILTER_PREDICATES) IS NOT NULL),'INTERNAL_FUNCTION',NULL)\n" +
+                    "          END || ';'    QUERY1\n" +
+                    "  FROM (SELECT DISTINCT P.OBJECT_NAME,\n" +
+                    "                    REPLACE (REGEXP_SUBSTR (OBJECT_ALIAS,'([^@]+)',1,1,NULL,1),'\"',NULL)    OBJECT_ALIAS,\n" +
+                    "                    ROWNUM RN\n" +
+                    "      FROM PLAN_TABLE P\n" +
+                    "     WHERE P.OBJECT_NAME IS NOT NULL AND P.OBJECT_NAME NOT LIKE 'SYS%' AND OBJECT_OWNER <> 'SYS')  OJ,\n" +
+                    "       (    SELECT LEVEL     LVL\n" +
+                    "              FROM DUAL\n" +
+                    "        CONNECT BY LEVEL <= (SELECT COUNT (*) FROM (SELECT DISTINCT P.OBJECT_NAME,\n" +
+                    "                    REPLACE (REGEXP_SUBSTR (OBJECT_ALIAS,'([^@]+)',1,1,NULL,1),'\"',NULL)    OBJECT_ALIAS,\n" +
+                    "                    ROWNUM RN\n" +
+                    "      FROM PLAN_TABLE P\n" +
+                    "     WHERE P.OBJECT_NAME IS NOT NULL AND P.OBJECT_NAME NOT LIKE 'SYS%' AND OBJECT_OWNER <> 'SYS'))) X\n" +
+                    " WHERE OJ.RN = X.LVL";
+            ResultSet rs3 = st.executeQuery(sql);
+            while(rs3.next()){
+                System.out.println(rs3.next());
+            }*/
+            grantedSchemaList.add(connThroughUser.toUpperCase());
             while(rs.next()){
                 grantedSchemaList.add(rs.getString(1));
             }
@@ -185,11 +216,11 @@ public class CopyController {
         }
     }
 
-    @RequestMapping(value="/getColumnName/{usr}/{table}", method = RequestMethod.GET)
-    public ResponseEntity<List<String>> getAllColumns(@RequestParam("usr") String usr, @RequestParam("table") String table) {
+    @GetMapping(value="/getColumnName/{usr}/{table}", produces = "application/json")
+    public ResponseEntity<List<String>> getAllColumns(@PathVariable("usr") String usr, @PathVariable("table") String table) {
         List<String> columnList = new ArrayList<String>();
         try{
-            Statement st = conFromDb.createStatement();
+            Statement st = connThrough.createStatement();
             ResultSet rs = st.executeQuery("SELECT column_name FROM all_tab_cols WHERE owner ='"+usr.toUpperCase()+"' and table_name = '"+table.toUpperCase()+"'");
             while(rs.next()){
                 columnList.add(rs.getString(1));
@@ -200,17 +231,24 @@ public class CopyController {
         }
     }
 
-    @PostMapping(path = "/createSyntheticData", consumes = "application/json"/*, produces = "application/json"*/)
-    public ResponseEntity<String> createSyntheticData(@RequestBody String objString){
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-        LocalDateTime now;
-        now=LocalDateTime.now();
-        System.out.println("Start time - "+dtf.format(now));
-        try {
-            System.out.println(objString);
-            return ResponseEntity.status(HttpStatus.OK).body("true");
-        }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ExceptionUtils.getStackTrace(e));
+    @RequestMapping(value = "/createSyntheticData", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<String> createSyntheticData(@RequestBody List<Map<String, String>> objString) {
+        {
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+            LocalDateTime now;
+            now = LocalDateTime.now();
+            System.out.println("Start time - " + dtf.format(now));
+            try {
+                int jobId = copyService.writeToFile(connectThroughDb, connThroughUser, "NA", "NA", "NA", "SDC");
+                System.out.println(objString);
+                now = LocalDateTime.now();
+                System.out.println("End time - " + dtf.format(now));
+                copyService.updateFileStatus(jobId, "Completed");
+                return ResponseEntity.status(HttpStatus.OK).body("true");
+            } catch (Exception e) {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ExceptionUtils.getStackTrace(e));
+            }
         }
     }
 }

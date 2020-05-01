@@ -38,6 +38,8 @@ public class CopyService {
                 copyType="Partition Copy";
             }else if(copyType.equalsIgnoreCase("CC")){
                 copyType="Customized Copy";
+            }else if(copyType.equalsIgnoreCase("SDC")){
+                copyType="Synthetic Data Creation";
             }
             row.createCell(6).setCellValue(copyType);
             System.out.println((new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date())));
@@ -46,8 +48,13 @@ public class CopyService {
             Cell cell2 = row.createCell(8);
             cell2.setCellValue(new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date()));
             row.createCell(9).setCellValue("In Progress");
-            row.createCell(10).setCellValue("Export in Progress");
-            row.createCell(11).setCellValue("Import in Progress");
+            if(!copyType.contains("Synthetic")){
+                row.createCell(10).setCellValue("Export in Progress");
+                row.createCell(11).setCellValue("Import in Progress");
+            }else{
+                row.createCell(10).setCellValue("NA");
+                row.createCell(11).setCellValue("NA");
+            }
             FileOutputStream fileOut = new FileOutputStream(excelFilePath);
             wb.write(fileOut);
             fileOut.close();
@@ -69,6 +76,10 @@ public class CopyService {
             builder1 = new ProcessBuilder("D:\\app\\Vishakha\\product\\11.2.0\\dbhome_1\\BIN\\exp",
                     user+"/"+user+"@"+value, "tables="+tableName+":"+partition, "file="+jobId+".dmp", "direct=y", "log="+jobId+"_export.txt");
         }else if(copyType.equalsIgnoreCase("CC")){
+            //delete plan table
+            //1st query execute
+            //2nd select output
+            //for(number of counts) and execute below
             Formatter x= new Formatter("D:\\Vishakha\\Files\\copy.par");
             x.format("tables="+tableName);
             x.format(" file="+jobId+".dmp");
@@ -248,6 +259,22 @@ public class CopyService {
             System.out.println("Deleted the dmp file: " + myObj.getName());
         } else {
             System.out.println("Failed to delete the file.");
+        }
+    }
+
+    public void updateFileStatus(int jobId, String status){
+        try {
+            wb = WorkbookFactory.create(new FileInputStream(excelFilePath));
+            Sheet firstSheet = wb.getSheetAt(0);
+            Cell cell = firstSheet.getRow(jobId).getCell(9);
+            cell.setCellValue(status);
+            Cell cell2 = firstSheet.getRow(jobId).getCell(8);
+            cell2.setCellValue(new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date()));
+            FileOutputStream fileOut = new FileOutputStream(excelFilePath);
+            wb.write(fileOut);
+            fileOut.close();
+        } catch (IOException e) {
+            throw new RuntimeException("Error when updating file.", e);
         }
     }
 }
