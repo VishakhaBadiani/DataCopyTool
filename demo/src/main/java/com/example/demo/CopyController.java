@@ -1,5 +1,8 @@
 package com.example.demo;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,8 +16,8 @@ import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @Component
@@ -233,22 +236,51 @@ public class CopyController {
 
     @RequestMapping(value = "/createSyntheticData", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<String> createSyntheticData(@RequestBody List<Map<String, String>> objString) {
-        {
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-            LocalDateTime now;
-            now = LocalDateTime.now();
-            System.out.println("Start time - " + dtf.format(now));
-            try {
-                int jobId = copyService.writeToFile(connectThroughDb, connThroughUser, "NA", "NA", "NA", "SDC");
-                System.out.println(objString);
-                now = LocalDateTime.now();
-                System.out.println("End time - " + dtf.format(now));
-                copyService.updateFileStatus(jobId, "Completed");
-                return ResponseEntity.status(HttpStatus.OK).body("true");
-            } catch (Exception e) {
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ExceptionUtils.getStackTrace(e));
+    public ResponseEntity<String> createSyntheticData(@RequestBody String jsonString ){
+        System.out.println("Entered createSyntheticData");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now;
+        now = LocalDateTime.now();
+        System.out.println("Start time - " + dtf.format(now));
+        List<SyntheticCriteria> syntheticCriteria = new ArrayList<SyntheticCriteria>();
+        List<SyntheticJoins> syntheticJoins = new ArrayList<SyntheticJoins>();
+        try{
+            int jobId = copyService.writeToFile(connectThroughDb, connThroughUser, "NA", "NA", "NA", "SDC");
+            ObjectMapper objectMapper = new ObjectMapper();
+            ObjectMapper objectMapper2 = new ObjectMapper();
+            objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+
+            JsonNode rootNode = objectMapper.readTree(jsonString);
+            JsonNode dataWrapNode = rootNode.path("SyntheticDataWrapper");
+            JsonNode synJoinNode = dataWrapNode.path("SyntheticJoins");
+            Iterator<JsonNode> elements = synJoinNode.elements();
+            while(elements.hasNext()){
+                JsonNode synJoin = elements.next();
+                SyntheticJoins sj = objectMapper2.readValue(synJoin.toString(), SyntheticJoins.class);
+                syntheticJoins.add(sj);
             }
+
+            JsonNode synCriteriaNode = dataWrapNode.path("SyntheticCriteria");
+            Iterator<JsonNode> elements2 = synCriteriaNode.elements();
+            while(elements2.hasNext()){
+                JsonNode synCr = elements2.next();
+                SyntheticCriteria sc = objectMapper2.readValue(synCr.toString(), SyntheticCriteria.class);
+                syntheticCriteria.add(sc);
+            }
+
+            for (SyntheticJoins synJ : syntheticJoins) {
+                System.out.println(synJ.toString() );
+            }
+
+            for(SyntheticCriteria synC : syntheticCriteria) {
+                System.out.println(synC.toString());
+            }
+            now = LocalDateTime.now();
+            System.out.println("End time - " + dtf.format(now));
+            copyService.updateFileStatus(jobId, "Completed");
+            return ResponseEntity.status(HttpStatus.OK).body("true");
+        } catch(Exception e){
+            return (ResponseEntity<String>) ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

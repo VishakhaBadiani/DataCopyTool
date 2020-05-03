@@ -2,49 +2,56 @@ package com.example.demo;
 
 public class SyntheticCriteria {
 
-    String Schema;
-    String Table;
-    String Column;
-    String Condition;
-    String Value;
+    String schema;
+    String table;
+    String column;
+    String condition;
+    String value;
 
     public String getSchema() {
-        return Schema;
+        return schema;
     }
 
     public void setSchema(String schema) {
-        Schema = schema;
+        this.schema = schema;
     }
 
     public String getTable() {
-        return Table;
+        return table;
     }
 
     public void setTable(String table) {
-        Table = table;
+        this.table = table;
     }
 
     public String getColumn() {
-        return Column;
+        return column;
     }
 
     public void setColumn(String column) {
-        Column = column;
+        this.column = column;
     }
 
     public String getCondition() {
-        return Condition;
+        return condition;
     }
 
     public void setCondition(String condition) {
-        Condition = condition;
+        this.condition = condition;
     }
 
     public String getValue() {
-        return Value;
+        return value;
     }
 
     public void setValue(String value) {
-        Value = value;
+        this.value = value;
+    }
+
+    @Override
+    public String toString(){
+
+        return ("schema:" + this.schema + " table: " + this.table + " column: " + this.column+ 
+        " condition: " + this.condition + " value: " + this.value); 
     }
 }

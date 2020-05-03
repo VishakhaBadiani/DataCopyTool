@@ -18,13 +18,13 @@
 
 <body onload="loadOptions()">
 
-
+   
               <div class="header">
 
               </div>
 
 
-
+              
   <div id="tabdiv">
     <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item">
@@ -72,9 +72,9 @@
                     <tr>
 
                       <th class="text-right" scope="col" ><h2><span style="width: 100%;text-align: center" class="badge badge-info">Source DB</span></h2></th>
-
+                     
                       <th class="text-right" scope="col" ><h2><span style="width: 100%;text-align: center" class="badge badge-info">Target DB</span></h2></h2></th>
-
+                     
 
 
                     </tr>
@@ -87,21 +87,21 @@
                             <label class="input-group-text" for="inputGroupSelect01">DB Name</label>
                           </div>
                           <select class="custom-select" id="fDBName">
-                            <option selected>Choose...</option>
+                            <option selected>Choose...</option>                            
                           </select>
                         </div>
                       </td>
                       <td>
                         <div class="input-group mb-3">
                           <select class="custom-select" id="tDBName">
-                            <option selected>Choose...</option>
+                            <option selected>Choose...</option>                            
                           </select>
                           <div class="input-group-append">
                             <label class="input-group-text" for="inputGroupSelect02">DB Name</label>
                           </div>
                         </div>
                       </td>
-
+                     
                     </tr>
                     <tr>
                       <td>
@@ -110,7 +110,7 @@
                             <label class="input-group-text" for="inputGroupSelect01">Schema Name</label>
                           </div>
                           <select class="custom-select" id="fSName">
-                            <option selected>Choose...</option>
+                            <option selected>Choose...</option>                            
                           </select>
                         </div>
 
@@ -118,14 +118,14 @@
                       <td>
                         <div class="input-group mb-3">
                           <select class="custom-select" id="tSName">
-                            <option selected>Choose...</option>
+                            <option selected>Choose...</option>                            
                           </select>
                           <div class="input-group-append">
                             <label class="input-group-text" for="inputGroupSelect02">Schema Name</label>
                           </div>
                         </div>
                       </td>
-
+                     
                     </tr>
 
                     <tr>
@@ -145,11 +145,11 @@
                           </div>
                         </div>
                       </td>
-
+                     
                     </tr>
 
-                    <tr>
-                      <td><button id="fAuth" type="button"  class="btn btn-primary btn-lg">Authenticate Source Connection</button></td>
+                    <tr>                      
+                      <td><button id="fAuth" type="button"  class="btn btn-primary btn-lg">Authenticate Source Connection</button></td>                      
                       <td><button id="tAuth" type="button" class="btn btn-primary btn-lg">Authenticate Target Connection</button> </td>
                     </tr>
                   </tbody>
@@ -196,7 +196,7 @@
                         </div>
                       </td>
                       <td><button id="sub" type="button" class="btn btn-primary btn-lg btn-block">Submit for Execution</button></td>
-                    </tr>
+                    </tr>                    
                     <tr >
                       <td >
                         <div class="input-group" id="part">
@@ -206,15 +206,15 @@
                           <select class="custom-select" id="Partition">
                             <option selected>Choose...</option>
                           </select>
-                        </div>
+                        </div>                      
                         <div class="input-group" id="Qry">
                           <div class="input-group-prepend">
                             <span class="input-group-text">Filter Criteria</span>
                           </div>
                           <textarea id="Textarea" class="form-control" aria-label="With textarea"></textarea>
                         </div>
-                      </td>
-                    </tr>
+                      </td> 
+                    </tr>                                     
                   </tbody>
                 </table>
 
@@ -281,7 +281,7 @@
           <div class="col"><hr></div>
       </div>
         <div class="row" id="SynRow2">
-          <div class="col">
+          <div class="col">            
             <div class="input-group mb-3">
               <div class="input-group-prepend">
                 <label class="input-group-text" for="inputGroupSelect01">DB Environment:</label>
@@ -293,16 +293,16 @@
                 <option value="3">Three</option> -->
               </select>
             </div> <!--class="input-group mb-3"-->
-          </div> <!--div class="col"-->
-          <div class="col">
+          </div> <!--div class="col"-->  
+          <div class="col">   
             <div class="input-group" >
               <div class="input-group-prepend">
                 <span class="input-group-text">User:</span>
               </div>
               <input type="text" id="SynUsrCon" class="form-control" placeholder="User" aria-label="Login" aria-describedby="basic-addon1">
-            </div>
-          </div>    <!--div class="col"-->
-          <div class="col">
+            </div>  
+          </div>    <!--div class="col"-->  
+          <div class="col">            
             <div class="input-group mb-3">
               <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">Password:</span>
@@ -310,27 +310,27 @@
               <input type="password" id="SynPassCon" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
             </div>
             <!--class="input-group mb-3"-->
-          </div>          <!--div class="col"-->
+          </div>          <!--div class="col"-->          
         </div>  <!--div class="row"-->
         <div class="row" id="SynRow3">
-          <div class="col-4" id="SynBlank"></div>
+          <div class="col-4" id="SynBlank"></div>         
           <div class="col-4"></div>
           <div class="col">
             <button type="button" id="SynAuthSubCon"  class="btn btn-primary btn-sm">Authenticate</button>
           </div> <!--div class="col"-->
         </div>
-
+      
         <div class="row" id="SynRow4">
           <div class="col"><hr></div>
           <div class="col-auto"><font color=blue size=+1><b>Identify Table Joins</b></font></div>
           <div class="col"><hr></div>
       </div>
       <div class="row" id="SynRow5">
-        <div class="col">
+        <div class="col">            
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <label class="input-group-text" for="inputGroupSelect01">Schema:</label>
-            </div>
+            </div>            
             <select class="custom-select" id="SynSchName1">
              <!--   <input class="custom-search" id="serchfSchema" type="text" placeholder="Search..">
             <option selected>Choose...</option>
@@ -340,18 +340,18 @@
             </select>
           </div> <!--class="input-group mb-3"-->
         </div> <!--div class="col"-->
-        <div class="col">
+        <div class="col">            
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <label class="input-group-text" for="inputGroupSelect01">Table:</label>
             </div>
             <select class="custom-select" id="SynTabName1">
               <option selected>Choose...</option>
-
+              
             </select>
           </div> <!--class="input-group mb-3"-->
         </div> <!--div class="col"-->
-        <div class="col">
+        <div class="col">            
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <label class="input-group-text" for="inputGroupSelect01">Column:</label>
@@ -387,7 +387,7 @@
       </div>  <!--div class="row"-->
 
       <div class="row" id="SynRow6">
-        <div class="col">
+        <div class="col">            
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <label class="input-group-text" for="inputGroupSelect01">Related Schema:</label>
@@ -400,7 +400,7 @@
             </select>
           </div> <!--class="input-group mb-3"-->
         </div> <!--div class="col"-->
-        <div class="col">
+        <div class="col">            
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <label class="input-group-text" for="inputGroupSelect01">Related Table:</label>
@@ -413,7 +413,7 @@
             </select>
           </div> <!--class="input-group mb-3"-->
         </div> <!--div class="col"-->
-        <div class="col">
+        <div class="col">            
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <label class="input-group-text" for="inputGroupSelect01">Related Column:</label>
@@ -447,8 +447,8 @@
         </div>
       </div> <!--div class="col"-->
       </div>  <!--div class="row"-->
-      <div class="row" id="SynRow7">
-        <div class="col-4"></div>
+      <div class="row" id="SynRow7"> 
+        <div class="col-4"></div>   
         <div class="col">
           <button type="button" id="SynJoinSubmit"  class="btn btn-primary btn-sm">Save Relation</button>
         </div> <!--div class="col"-->`
@@ -478,12 +478,12 @@
             <th scope="col">Max Count</th>
           </tr>
         </thead>
-        <tbody id="SynJoinTab-body">
+        <tbody id="SynJoinTab-body">          
         </tbody>
       </table>
     </div> <!--div class="row" id="SynRow9"-->
     <div class="row" id="SynRow10">
-      <div class="col-4"></div>
+      <div class="col-4"></div>      
       <div class="col-4">
         <button type="button" id="SynFreezJSubmit"  class="btn btn-primary btn-sm">Freeze Joins</button>
       </div> <!--div class="col"-->
@@ -497,8 +497,8 @@
       <div class="col"><hr></div>
     </div> <!--div class="row" id="SynRow8"-->
 
-    <div class="row" id="SynRow12">
-        <div class="col-4">
+    <div class="row" id="SynRow12">      
+        <div class="col-4">            
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <label class="input-group-text" for="inputGroupSelect01">Schema:</label>
@@ -511,7 +511,7 @@
             </select>
           </div> <!--class="input-group mb-3"-->
         </div> <!--div class="col"-->
-        <div class="col-4">
+        <div class="col-4">            
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <label class="input-group-text" for="inputGroupSelect01">Table:</label>
@@ -523,11 +523,11 @@
               <option value="3">Three</option> -->
             </select>
           </div> <!--class="input-group mb-3"-->
-        </div> <!--div class="col"-->
+        </div> <!--div class="col"-->        
     </div>  <!--div class="row"-->
 
-      <div class="row" id="SynRow14">
-        <div class="col">
+      <div class="row" id="SynRow14">      
+        <div class="col">            
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <label class="input-group-text" for="inputGroupSelect01">Column:</label>
@@ -540,7 +540,7 @@
             </select>
           </div> <!--class="input-group mb-3"-->
         </div> <!--div class="col"-->
-        <div class="col">
+        <div class="col">            
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <label class="input-group-text" for="inputGroupSelect01">Synthetic Criteria:</label>
@@ -550,10 +550,10 @@
               <option value="eq">=</option>
               <option value="static">static</option>
               <option value="inc">incremental</option>
-              <option value="random">random</option>
+              <option value="random">random</option>             
             </select>
           </div> <!--class="input-group mb-3"-->
-        </div>          <!--div class="col"-->
+        </div>          <!--div class="col"-->        
         <div class="col-4">
           <div class="input-group mb-3">
             <div class="input-group-prepend">
@@ -562,9 +562,9 @@
             <input type="text" id="SynFV" class="form-control" placeholder="Filter Value" aria-label="FilterValue" aria-describedby="basic-addon1">
           </div>
         </div> <!--div class="col"-->
-      </div>  <!--div class="row"-->
+      </div>  <!--div class="row"-->      
      <div class="row" id="SynRow15">
-      <div class="col-4"></div>
+      <div class="col-4"></div>      
       <div class="col">
         <button type="button" id="SynSaveFCSubmit"  class="btn btn-primary btn-sm">Save Filter Criteria</button>
       </div> <!--div class="col"-->
@@ -589,12 +589,12 @@
             <th scope="col">Value</th>
           </tr>
         </thead>
-        <tbody id="SynFilterTab-body">
+        <tbody id="SynFilterTab-body">          
         </tbody>
       </table>
     </div> <!--div class="row" id="SynRow17"-->
     <div class="row" id="SynRow18">
-      <div class="col-4"></div>
+      <div class="col-4"></div>      
       <div class="col">
         <button type="button" id="SynFreezeFCSubmit"  class="btn btn-primary btn-sm">Freeze Filter Criteria</button>
       </div> <!--div class="col"-->
@@ -607,7 +607,7 @@
       <div class="col-auto"><font color=blue size=+1><b>Send Request for Synthetic Data Generation</b></font></div>
       <div class="col"><hr></div>
     </div> <!--div class="row" id="SynRow19"-->
-    <div class="row" id="SynRow20">
+    <div class="row" id="SynRow20">          
       <div class="col">
         <button type="button" id="SynFinalSubmit"  class="btn btn-primary btn-lg">Send Request for Synthetic Data Generation</button>
       </div> <!--div class="col"-->
