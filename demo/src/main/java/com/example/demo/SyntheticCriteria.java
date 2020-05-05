@@ -3,8 +3,8 @@ package com.example.demo;
 public class SyntheticCriteria {
 
     String schema;
-    String table;
-    String column;
+    String tab;
+    String col;
     String condition;
     String value;
 
@@ -16,20 +16,20 @@ public class SyntheticCriteria {
         this.schema = schema;
     }
 
-    public String getTable() {
-        return table;
+    public String getTab() {
+        return tab;
     }
 
-    public void setTable(String table) {
-        this.table = table;
+    public void setTab(String tab) {
+        this.tab = tab;
     }
 
-    public String getColumn() {
-        return column;
+    public String getCol() {
+        return col;
     }
 
-    public void setColumn(String column) {
-        this.column = column;
+    public void setCol(String col) {
+        this.col = col;
     }
 
     public String getCondition() {
@@ -51,7 +51,7 @@ public class SyntheticCriteria {
     @Override
     public String toString(){
 
-        return ("schema:" + this.schema + " table: " + this.table + " column: " + this.column+ 
+        return ("schema:" + this.schema + " table: " + this.tab + " column: " + this.col+
         " condition: " + this.condition + " value: " + this.value); 
     }
 }

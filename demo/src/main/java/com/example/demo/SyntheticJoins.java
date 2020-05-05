@@ -37,12 +37,16 @@ public class SyntheticJoins {
         this.column1 = column1;
     }
 
-    public String isStatic1() {
+    public String getStatic1() {
         return static1;
     }
 
     public void setStatic1(String static1) {
         this.static1 = static1;
+    }
+
+    public String getStatic2() {
+        return static2;
     }
 
     public String getMaxCount1() {
@@ -75,14 +79,6 @@ public class SyntheticJoins {
 
     public void setColumn2(String column2) {
         this.column2 = column2;
-    }
-
-    public String isStatic2() {
-        return static2;
-    }
-
-    public void setStatic2(String static2) {
-        this.static2 = static2;
     }
 
     public String getMaxCount2() {
