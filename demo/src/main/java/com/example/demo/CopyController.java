@@ -172,20 +172,6 @@ public class CopyController {
                 connectThroughDb = dbn;
                 connThrough = DriverManager.getConnection(url, user, pass);
                 connThroughUser = user.substring(user.indexOf("[") + 1).split("]")[0];
-                /*CallableStatement cStmt = connThrough.prepareCall("{call greetings()}");
-                cStmt.executeQuery();*/
-                /*CallableStatement stmnt = connThrough.prepareCall("call customProc(?)");
-                ArrayDescriptor descriptor = ArrayDescriptor.createDescriptor("PARAM_HOLDER_OBJ_TABLE", connThrough);
-                ParamHolder[] paramArray = new ParamHolder[]{                                          //create an array of four elements
-                        new ParamHolder("param1","param2","param3"),
-                        new ParamHolder("param1","param2","param3"),
-                        new ParamHolder("param1","param2","param3"),
-                        new ParamHolderf("param1","param2","param3")                                                   //Each array element represents a set of InputParams
-                };
-                Array array = new ARRAY(descriptor , connThrough, paramArray);
-                stmnt.setArray(1, array );
-                boolean value = stmnt.execute();
-                System.out.println(value);*/
             }
             System.out.println("DB Authentication!" + user + " " + pass + " " + dbn);
             return ResponseEntity.status(HttpStatus.OK).body("true");
