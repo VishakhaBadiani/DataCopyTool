@@ -247,12 +247,10 @@ public class CopyController {
         LocalDateTime now;
         now = LocalDateTime.now();
         System.out.println("Start time - " + dtf.format(now));
-        List<SyntheticCriteria> syntheticCriteria = new ArrayList<SyntheticCriteria>();
-        List<SyntheticJoins> syntheticJoins = new ArrayList<SyntheticJoins>();
+        List<SyntheticCriteria> syntheticCriteriaList = new ArrayList<SyntheticCriteria>();
+        List<SyntheticJoins> syntheticJoinsList = new ArrayList<SyntheticJoins>();
         OracleCallableStatement callStmt = null;
         STRUCT structProject1;
-        STRUCT[] structArrayOfProjects1 = new STRUCT[10];
-        STRUCT[] structArrayOfProjects2 = new STRUCT[10];
         int count1 = 0, count2 = 0;
         try {
             callStmt = (OracleCallableStatement) connThrough.prepareCall("{call create_syn_data(?,?)}");
@@ -267,30 +265,36 @@ public class CopyController {
             while (elements.hasNext()) {
                 JsonNode synJoin = elements.next();
                 SyntheticJoins sj = objectMapper2.readValue(synJoin.toString(), SyntheticJoins.class);
+                syntheticJoinsList.add(sj);
+            }
+            STRUCT[] structArrayOfProjects1 = new STRUCT[syntheticJoinsList.size()];
+            for(SyntheticJoins sj: syntheticJoinsList){
                 Object[] obj = new Object[]{sj.getSchema1(), sj.getTable1(), sj.getColumn1(), sj.getStatic1(), sj.getMaxCount1(),
                         sj.getSchema2(), sj.getTable2(), sj.getColumn2(), sj.getStatic2(), sj.getMaxCount2()};
                 StructDescriptor projectTypeDesc = StructDescriptor.createDescriptor("SYNTHETIC_JOIN", connThrough);
                 structProject1 = new STRUCT(projectTypeDesc, connThrough, obj);
                 structArrayOfProjects1[count1] = structProject1;
                 count1++;
-                syntheticJoins.add(sj);
             }
             JsonNode synCriteriaNode = dataWrapNode.path("SyntheticCriteria");
             Iterator<JsonNode> elements2 = synCriteriaNode.elements();
             while (elements2.hasNext()) {
                 JsonNode synCr = elements2.next();
                 SyntheticCriteria sc = objectMapper2.readValue(synCr.toString(), SyntheticCriteria.class);
+                syntheticCriteriaList.add(sc);
+            }
+            STRUCT[] structArrayOfProjects2 = new STRUCT[syntheticCriteriaList.size()];
+            for(SyntheticCriteria sc: syntheticCriteriaList){
                 Object[] obj = new Object[]{sc.getSchema(), sc.getTab(), sc.getCol(), sc.getCondition(), sc.getValue()};
                 StructDescriptor projectTypeDesc = StructDescriptor.createDescriptor("SYNTHETIC_CRITERIA", connThrough);
                 structProject1 = new STRUCT(projectTypeDesc, connThrough, obj);
                 structArrayOfProjects2[count2] = structProject1;
                 count2++;
-                syntheticCriteria.add(sc);
             }
-            for (SyntheticJoins synJ : syntheticJoins) {
+            for (SyntheticJoins synJ : syntheticJoinsList) {
                 System.out.println(synJ.toString());
             }
-            for (SyntheticCriteria synC : syntheticCriteria) {
+            for (SyntheticCriteria synC : syntheticCriteriaList) {
                 System.out.println(synC.toString());
             }
             ArrayDescriptor projectTypeArrayDesc1 = ArrayDescriptor.createDescriptor("SYNJOINARR", connThrough);
