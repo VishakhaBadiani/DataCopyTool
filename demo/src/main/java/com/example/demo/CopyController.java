@@ -154,6 +154,21 @@ public class CopyController {
         }
     }
 
+    @RequestMapping(value = "/getSubPartName/{table}/{partitionName}", method = RequestMethod.GET)
+    public ResponseEntity<List<String>> getAllSubParts(@PathVariable("table") String table, @PathVariable("partitionName") String partitionName) {
+        List<String> subPartList = new ArrayList<String>();
+        try {
+            Statement st = conFromDb.createStatement();
+            ResultSet rs = st.executeQuery("select distinct subpartition_name from all_tab_subpartitions where table_name='" + table.toUpperCase() + "' and table_owner='" + fromUser.toUpperCase() +"' and partition_NAME='" + partitionName.toUpperCase() + "'");
+            while (rs.next()) {
+                subPartList.add(rs.getString(1));
+            }
+            return ResponseEntity.status(HttpStatus.OK).body(subPartList);
+        } catch (Exception e) {
+            return (ResponseEntity<List<String>>) ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @RequestMapping(value = "/authDB", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<String> authDB(@RequestParam("usr") String user, @RequestParam("pass") String pass,
