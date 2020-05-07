@@ -3,6 +3,7 @@ package com.example.demo;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +26,10 @@ public class DemoApplicationTests {
 	@Autowired
 	private CopyService copyService;
 
-	String excelFilePath = "D:\\Vishakha\\Job_Details.xlsx";
+	String excelFilePath = System.getProperty("DCT_HOME")+"\\Job_Details.xlsx";
 	Workbook wb;
 
+	@Ignore
 	@Test
 	public void positiveWriteToFileTest() throws IOException {
 		wb = WorkbookFactory.create(new FileInputStream(excelFilePath));
@@ -41,9 +43,10 @@ public class DemoApplicationTests {
 		assertTrue(jobId==originalCount+1);
 	}
 
+	@Ignore
 	@Test(expected = FileNotFoundException.class)
 	public void negativeWriteToFileTest() throws IOException {
-		wb = WorkbookFactory.create(new FileInputStream("C:\\Files.xlsx"));
+		wb = WorkbookFactory.create(new FileInputStream(System.getProperty("DCT_HOME")+"\\Files.xlsx"));
 		Sheet sheet = wb.getSheetAt(0);
 		int originalCount=sheet.getLastRowNum();
 		//copyService.export("trd","trd","iedb_uat", "trades", 20, "TC", "", "");
@@ -53,15 +56,17 @@ public class DemoApplicationTests {
 		fileOut.close();
 	}
 
+	@Ignore
 	@Test
 	public void positiveReadFromFileTest() throws ParseException {
 		JobDetails jobDetails = (JobDetails) copyService.readFromFile();
 		assertNotNull(jobDetails);
 	}
 
+	@Ignore
 	@Test(expected = FileNotFoundException.class)
 	public void negativeReadFromFileTest() throws IOException, ParseException {
-		wb = WorkbookFactory.create(new FileInputStream("C:\\Files.xlsx"));
+		wb = WorkbookFactory.create(new FileInputStream(System.getProperty("DCT_HOME")+"\\Files.xlsx"));
 		copyService.readFromFile();
 	}
 }

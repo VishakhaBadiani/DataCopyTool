@@ -11,7 +11,7 @@
 <%
 
 String filename = "UserManual.docx";
-String  filepath = "D:\\Vishakha\\";
+String  filepath = env.getProperty("DCT_HOME")+"\\Vishakha\\";
 response.setContentType("APPLICATION/OCTET-STREAM");
 
 response.setHeader("Content-Disposition","attachment; filename=\"" + filename + "\"");

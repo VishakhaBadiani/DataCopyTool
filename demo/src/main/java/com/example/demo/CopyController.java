@@ -33,7 +33,7 @@ public class CopyController {
     File decryptedFile;
 
     Connection conFromDb, conToDb, connThrough;
-    String fromUser, connThroughUser, connectThroughDb;
+    String fromUser, connThroughUser, connectThroughDb, fromSid, toSid;
 
     @Autowired
     CopyService copyService;
@@ -65,13 +65,13 @@ public class CopyController {
         int jobId;
         try {
             jobId = copyService.writeToFile(jobDetails.getFromDB(), jobDetails.getFromSchName(), jobDetails.getToDB(), jobDetails.getToSchName(), jobDetails.getTableName(), jobDetails.getCopyType());
-            inputFile = new File("D:\\Vishakha\\Files\\" + jobId + ".dmp");
-            encryptedFile = new File("D:\\Vishakha\\Files\\" + jobId + ".encrypted");
-            decryptedFile = new File("D:\\Vishakha\\Files\\" + jobId + ".decrypted");
-            copyService.export(jobDetails.getFromSchName(), jobDetails.getFromPWD(), jobDetails.getFromDB(), jobDetails.getTableName(), jobId, jobDetails.getCopyType(), jobDetails.getPartition(), jobDetails.getTextArea());
-            /*CryptoUtils.encrypt(key, inputFile, encryptedFile);
+            inputFile = new File(System.getProperty("DCT_HOME")+"\\Files\\" + jobId + ".dmp");
+            encryptedFile = new File(System.getProperty("DCT_HOME")+"\\Files\\" + jobId + ".encrypted");
+            decryptedFile = new File(System.getProperty("DCT_HOME")+"\\Files\\" + jobId + ".decrypted");
+            copyService.export(jobDetails.getFromSchName(), jobDetails.getFromPWD(), jobDetails.getFromDB(), jobDetails.getTableName(), jobId, jobDetails.getCopyType(), jobDetails.getPartition(), jobDetails.getTextArea(), fromSid);
+            /*CryptoUtils.ORencrypt(key, inputFile, encryptedFile);
             CryptoUtils.decrypt(key, encryptedFile, decryptedFile);*/
-            copyService.importData(jobDetails.getToSchName(), jobDetails.getToPWD(), jobDetails.getToDB(), jobId);
+            copyService.importData(jobDetails.getToSchName(), jobDetails.getToPWD(), jobDetails.getToDB(), jobId, toSid);
             CryptoUtils.encrypt(key, inputFile, encryptedFile);
             copyService.deleteFile(jobId);
             now = LocalDateTime.now();
@@ -181,8 +181,18 @@ public class CopyController {
             if (dbType.equalsIgnoreCase("source")) {
                 fromUser = user;
                 conFromDb = DriverManager.getConnection(url, user, pass);
+                Statement st = conFromDb.createStatement();
+                ResultSet rs = st.executeQuery("select ora_database_name from dual");
+                while (rs.next()) {
+                    fromSid=rs.getString(1);
+                }
             } else if (dbType.equalsIgnoreCase("target")) {
                 conToDb = DriverManager.getConnection(url, user, pass);
+                Statement st = conFromDb.createStatement();
+                ResultSet rs = st.executeQuery("select ora_database_name from dual");
+                while (rs.next()) {
+                    toSid=rs.getString(1);
+                }
             } else if (dbType.equalsIgnoreCase("user")) {
                 connectThroughDb = dbn;
                 connThrough = DriverManager.getConnection(url, user, pass);

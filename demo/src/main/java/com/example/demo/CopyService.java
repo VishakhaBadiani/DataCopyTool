@@ -10,8 +10,8 @@ import java.util.*;
 @Component
 public class CopyService {
 
-    String excelFilePath = "D:\\Vishakha\\Job_Details.xlsx";
-    String dmpFilePath = "D:\\Vishakha\\Files\\";
+    String excelFilePath = System.getProperty("DCT_HOME")+"\\Job_Details.xlsx";
+    String dmpFilePath = System.getProperty("DCT_HOME")+"\\Files\\";
     Workbook wb;
     Properties configProp = new Properties();
     InputStream in = this.getClass().getClassLoader().getResourceAsStream("application.properties");
@@ -63,34 +63,32 @@ public class CopyService {
         }
         return jobId;
     }
-    public void export(String user, String password, String fromDb, String tableName, int jobId, String copyType, String partition, String textArea) throws IOException {
-        configProp.load(in);
-        value = configProp.getProperty(fromDb);
+    public void export(String user, String password, String fromDb, String tableName, int jobId, String copyType, String partition, String textArea, String fromSid) throws IOException {
         System.out.println("Copying Table - "+tableName +"for copyType - "+copyType);
         Process p = null;
         ProcessBuilder builder1 = null;
         if(copyType.equalsIgnoreCase("TC")){
-            builder1 = new ProcessBuilder("D:\\app\\Vishakha\\product\\11.2.0\\dbhome_1\\BIN\\exp",
-                    user+"/"+user+"@"+value, "tables="+tableName, "file="+jobId+".dmp", "direct=y", "log="+jobId+"_export.txt");
+            builder1 = new ProcessBuilder(System.getProperty("ORACLE_HOME")+"\\BIN\\exp",
+                    user+"/"+user+"@"+fromSid, "tables="+tableName, "file="+jobId+".dmp", "direct=y", "log="+jobId+"_export.txt");
         }else if(copyType.equalsIgnoreCase("PC")){
-            builder1 = new ProcessBuilder("D:\\app\\Vishakha\\product\\11.2.0\\dbhome_1\\BIN\\exp",
-                    user+"/"+user+"@"+value, "tables="+tableName+":"+partition, "file="+jobId+".dmp", "direct=y", "log="+jobId+"_export.txt");
+            builder1 = new ProcessBuilder(System.getProperty("ORACLE_HOME")+"\\BIN\\exp",
+                    user+"/"+user+"@"+fromSid, "tables="+tableName+":"+partition, "file="+jobId+".dmp", "direct=y", "log="+jobId+"_export.txt");
         }else if(copyType.equalsIgnoreCase("CC")){
             //delete plan table
             //1st query execute
             //2nd select output
             //for(number of counts) and execute below
-            Formatter x= new Formatter("D:\\Vishakha\\Files\\copy.par");
+            Formatter x= new Formatter(System.getProperty("DCT_HOME")+"\\Files\\copy.par");
             x.format("tables="+tableName);
             x.format(" file="+jobId+".dmp");
             x.format(" log="+jobId+"_export.txt");
             x.format(" query="+textArea);
             x.close();
-            builder1 = new ProcessBuilder("D:\\app\\Vishakha\\product\\11.2.0\\dbhome_1\\BIN\\exp",
-                    user+"/"+user+"@"+value, "parfile=copy.par");
+            builder1 = new ProcessBuilder(System.getProperty("ORACLE_HOME")+"\\BIN\\exp",
+                    user+"/"+user+"@"+fromSid, "parfile=copy.par");
         }
-        builder1.directory(new File("D:\\Vishakha\\Files\\"));
-        builder1.environment().put("ORACLE_HOME", "D:\\app\\Vishakha\\product\\11.2.0\\dbhome_1");
+        builder1.directory(new File(System.getProperty("DCT_HOME")+"\\Files\\"));
+        builder1.environment().put("ORACLE_HOME", System.getProperty("ORACLE_HOME"));
         builder1.environment().put("PATH", "%ORACLE_HOME%\\BIN;%PATH%");
 
         builder1.redirectErrorStream(true);
@@ -127,19 +125,17 @@ public class CopyService {
         }
     }
 
-    public void importData(String toSch, String toPwd, String toDB, int jobId){
+    public void importData(String toSch, String toPwd, String toDB, int jobId, String toSid){
         try{
-            configProp.load(in);
-            value = configProp.getProperty(toDB);
             wb = WorkbookFactory.create(new FileInputStream(excelFilePath));
             Sheet firstSheet = wb.getSheetAt(0);
             Cell cell3 = firstSheet.getRow(jobId).getCell(11);
             Cell cell = firstSheet.getRow(jobId).getCell(9);
             Process p = null;
-            ProcessBuilder builder1 = new ProcessBuilder("D:\\app\\Vishakha\\product\\11.2.0\\dbhome_1\\BIN\\imp", toSch+"/"+toSch+"@"+value, "file="+jobId+".dmp",
+            ProcessBuilder builder1 = new ProcessBuilder(System.getProperty("ORACLE_HOME")+"\\BIN\\imp", toSch+"/"+toSch+"@"+toSid, "file="+jobId+".dmp",
                     "full=y", "log="+jobId+"_import.txt", "ignore=y");
-            builder1.directory(new File("D:\\Vishakha\\Files\\"));
-            builder1.environment().put("ORACLE_HOME", "D:\\app\\Vishakha\\product\\11.2.0\\dbhome_1");
+            builder1.directory(new File(System.getProperty("DCT_HOME")+"\\Files\\"));
+            builder1.environment().put("ORACLE_HOME", System.getProperty("ORACLE_HOME"));
             builder1.environment().put("PATH", "%ORACLE_HOME%\\BIN;%PATH%");
             builder1.redirectErrorStream(true);
             p = builder1.start();
