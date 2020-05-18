@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.model;
 
 public class CryptoException extends Exception{
     public CryptoException() {

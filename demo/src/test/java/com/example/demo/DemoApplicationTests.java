@@ -1,5 +1,6 @@
 package com.example.demo;
 
+/*import com.example.demo.*;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
@@ -18,19 +19,19 @@ import java.text.ParseException;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-
-@RunWith(SpringRunner.class)
-@SpringBootTest
+*/
+//@RunWith(SpringRunner.class)
+//@SpringBootTest
 public class DemoApplicationTests {
-
+/*
 	@Autowired
 	private CopyService copyService;
 
-	String excelFilePath = System.getProperty("DCT_HOME")+"\\Job_Details.xlsx";
+	String excelFilePath = "D:\\Vishakha\\Job_Details.xlsx";
 	Workbook wb;
 
 	@Ignore
-	@Test
+	@Test	
 	public void positiveWriteToFileTest() throws IOException {
 		wb = WorkbookFactory.create(new FileInputStream(excelFilePath));
 		Sheet sheet = wb.getSheetAt(0);
@@ -46,7 +47,7 @@ public class DemoApplicationTests {
 	@Ignore
 	@Test(expected = FileNotFoundException.class)
 	public void negativeWriteToFileTest() throws IOException {
-		wb = WorkbookFactory.create(new FileInputStream(System.getProperty("DCT_HOME")+"\\Files.xlsx"));
+		wb = WorkbookFactory.create(new FileInputStream("C:\\Files.xlsx"));
 		Sheet sheet = wb.getSheetAt(0);
 		int originalCount=sheet.getLastRowNum();
 		//copyService.export("trd","trd","iedb_uat", "trades", 20, "TC", "", "");
@@ -59,14 +60,15 @@ public class DemoApplicationTests {
 	@Ignore
 	@Test
 	public void positiveReadFromFileTest() throws ParseException {
-		JobDetails jobDetails = (JobDetails) copyService.readFromFile();
+		model.JobDetails jobDetails = (model.JobDetails) copyService.readFromFile();
 		assertNotNull(jobDetails);
 	}
 
 	@Ignore
 	@Test(expected = FileNotFoundException.class)
 	public void negativeReadFromFileTest() throws IOException, ParseException {
-		wb = WorkbookFactory.create(new FileInputStream(System.getProperty("DCT_HOME")+"\\Files.xlsx"));
+		wb = WorkbookFactory.create(new FileInputStream("C:\\Files.xlsx"));
 		copyService.readFromFile();
 	}
+	*/
 }
