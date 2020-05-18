@@ -1,0 +1,391 @@
+2020-05-18 11:42:22.319  INFO 10656 --- [main] com.example.demo.DemoApplication         : Starting DemoApplication on DESKTOP-9COS71C with PID 10656 (C:\demoApp\demo\target\classes started by Vishakha in C:\demoApp\demo)
+2020-05-18 11:42:22.521  INFO 10656 --- [main] com.example.demo.DemoApplication         : No active profile set, falling back to default profiles: default
+2020-05-18 11:43:14.529  INFO 10656 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 7075 (http)
+2020-05-18 11:43:14.757  INFO 10656 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-05-18 11:43:14.757  INFO 10656 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.17]
+2020-05-18 11:43:21.518  INFO 10656 --- [main] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2020-05-18 11:43:52.172  INFO 10656 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-05-18 11:43:52.173  INFO 10656 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 89006 ms
+2020-05-18 11:43:58.087  INFO 10656 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-05-18 11:43:59.676  INFO 10656 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2020-05-18 11:44:02.107  INFO 10656 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 7075 (http) with context path ''
+2020-05-18 11:44:02.115  INFO 10656 --- [main] com.example.demo.DemoApplication         : Started DemoApplication in 104.043 seconds (JVM running for 116.233)
+2020-05-18 11:48:35.298  INFO 10656 --- [Thread-3] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-05-18 11:48:54.900  INFO 8776 --- [main] com.example.demo.DemoApplication         : Starting DemoApplication on DESKTOP-9COS71C with PID 8776 (C:\demoApp\demo\target\classes started by Vishakha in C:\demoApp\demo)
+2020-05-18 11:48:54.903  INFO 8776 --- [main] com.example.demo.DemoApplication         : No active profile set, falling back to default profiles: default
+2020-05-18 11:49:13.264  INFO 8776 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 7075 (http)
+2020-05-18 11:49:13.625  INFO 8776 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-05-18 11:49:13.627  INFO 8776 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.17]
+2020-05-18 11:49:19.295  INFO 8776 --- [main] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2020-05-18 11:49:19.317  INFO 8776 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-05-18 11:49:19.317  INFO 8776 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 23933 ms
+2020-05-18 11:49:20.713  INFO 8776 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-05-18 11:49:21.300  INFO 8776 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2020-05-18 11:49:22.233  INFO 8776 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 7075 (http) with context path ''
+2020-05-18 11:49:22.288  INFO 8776 --- [main] com.example.demo.DemoApplication         : Started DemoApplication in 31.251 seconds (JVM running for 34.867)
+2020-05-18 11:49:22.848  INFO 8776 --- [http-nio-7075-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-05-18 11:49:22.851  INFO 8776 --- [http-nio-7075-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-05-18 11:49:22.880  INFO 8776 --- [http-nio-7075-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 27 ms
+2020-05-18 11:49:23.078  INFO 8776 --- [http-nio-7075-exec-1] com.example.demo.CopyController          : Reached index start.
+2020-05-18 11:51:30.061  INFO 8776 --- [http-nio-7075-exec-6] com.example.demo.CopyController          : Entered createSyntheticData
+2020-05-18 11:51:37.341  INFO 8776 --- [http-nio-7075-exec-6] com.example.model.CopyService            : Job Id - 62
+2020-05-18 11:51:37.381  INFO 8776 --- [http-nio-7075-exec-6] com.example.model.CopyService            : 18-05-2020 11:51:37
+2020-05-18 11:51:49.039  INFO 8776 --- [http-nio-7075-exec-6] com.example.demo.CopyController          : End time - 2020/05/18 11:51:49
+2020-05-18 11:53:47.622  INFO 8776 --- [http-nio-7075-exec-9] com.example.demo.CopyController          : Reached index start.
+2020-05-18 11:55:16.357  INFO 8776 --- [http-nio-7075-exec-7] com.example.demo.CopyController          : Entered createSyntheticData
+2020-05-18 11:55:16.482  INFO 8776 --- [http-nio-7075-exec-7] com.example.model.CopyService            : Job Id - 63
+2020-05-18 11:55:16.502  INFO 8776 --- [http-nio-7075-exec-7] com.example.model.CopyService            : 18-05-2020 11:55:16
+2020-05-18 11:55:18.030  INFO 8776 --- [http-nio-7075-exec-7] com.example.demo.CopyController          : End time - 2020/05/18 11:55:18
+2020-05-18 11:58:36.172  INFO 8776 --- [http-nio-7075-exec-2] com.example.demo.CopyController          : Reached index start.
+2020-05-18 12:11:35.758  INFO 8776 --- [http-nio-7075-exec-10] com.example.demo.CopyController          : Entered createSyntheticData
+2020-05-18 12:11:36.047  INFO 8776 --- [http-nio-7075-exec-10] com.example.model.CopyService            : Job Id - 64
+2020-05-18 12:11:36.050  INFO 8776 --- [http-nio-7075-exec-10] com.example.model.CopyService            : 18-05-2020 12:11:36
+2020-05-18 12:11:39.374  INFO 8776 --- [http-nio-7075-exec-10] com.example.demo.CopyController          : End time - 2020/05/18 12:11:39
+2020-05-18 12:22:04.873  INFO 8776 --- [Thread-3] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-05-18 12:33:46.117  INFO 7068 --- [main] com.example.demo.DemoApplication         : Starting DemoApplication on DESKTOP-9COS71C with PID 7068 (C:\demoApp\demo\target\classes started by Vishakha in C:\demoApp\demo)
+2020-05-18 12:33:46.121  INFO 7068 --- [main] com.example.demo.DemoApplication         : No active profile set, falling back to default profiles: default
+2020-05-18 12:33:49.798  INFO 7068 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 7075 (http)
+2020-05-18 12:33:49.884  INFO 7068 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-05-18 12:33:49.885  INFO 7068 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.17]
+2020-05-18 12:33:50.621  INFO 7068 --- [main] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2020-05-18 12:33:50.629  INFO 7068 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-05-18 12:33:50.630  INFO 7068 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 4304 ms
+2020-05-18 12:33:51.086  INFO 7068 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-05-18 12:33:51.477  INFO 7068 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2020-05-18 12:33:51.720  INFO 7068 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 7075 (http) with context path ''
+2020-05-18 12:33:51.725  INFO 7068 --- [main] com.example.demo.DemoApplication         : Started DemoApplication in 6.725 seconds (JVM running for 8.672)
+2020-05-18 12:33:52.050  INFO 7068 --- [http-nio-7075-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-05-18 12:33:52.050  INFO 7068 --- [http-nio-7075-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-05-18 12:33:52.065  INFO 7068 --- [http-nio-7075-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 14 ms
+2020-05-18 12:33:52.144  INFO 7068 --- [http-nio-7075-exec-1] com.example.demo.CopyController          : Reached index start.
+2020-05-18 12:36:30.041  INFO 7068 --- [http-nio-7075-exec-8] com.example.demo.CopyController          : Entered createSyntheticData
+2020-05-18 12:36:31.810  INFO 7068 --- [http-nio-7075-exec-8] com.example.model.CopyService            : Job Id - 65
+2020-05-18 12:36:31.836  INFO 7068 --- [http-nio-7075-exec-8] com.example.model.CopyService            : 18-05-2020 12:36:31
+2020-05-18 12:36:33.812  INFO 7068 --- [http-nio-7075-exec-8] com.example.demo.CopyController          : End time - 2020/05/18 12:36:33
+2020-05-18 12:38:40.102  INFO 7068 --- [http-nio-7075-exec-1] com.example.demo.CopyController          : Reached index start.
+2020-05-18 12:39:50.263  INFO 7068 --- [http-nio-7075-exec-7] com.example.demo.CopyController          : Entered createSyntheticData
+2020-05-18 12:39:50.394  INFO 7068 --- [http-nio-7075-exec-7] com.example.model.CopyService            : Job Id - 66
+2020-05-18 12:39:50.413  INFO 7068 --- [http-nio-7075-exec-7] com.example.model.CopyService            : 18-05-2020 12:39:50
+2020-05-18 12:39:51.048  INFO 7068 --- [http-nio-7075-exec-7] com.example.demo.CopyController          : End time - 2020/05/18 12:39:51
+2020-05-18 12:44:19.051  INFO 7068 --- [http-nio-7075-exec-9] com.example.demo.CopyController          : Reached index start.
+2020-05-18 12:45:12.912  INFO 7068 --- [http-nio-7075-exec-2] com.example.demo.CopyController          : Entered createSyntheticData
+2020-05-18 12:45:12.975  INFO 7068 --- [http-nio-7075-exec-2] com.example.model.CopyService            : Job Id - 67
+2020-05-18 12:45:12.982  INFO 7068 --- [http-nio-7075-exec-2] com.example.model.CopyService            : 18-05-2020 12:45:12
+2020-05-18 12:45:13.464  INFO 7068 --- [http-nio-7075-exec-2] com.example.demo.CopyController          : End time - 2020/05/18 12:45:13
+2020-05-18 12:51:40.680  INFO 7068 --- [http-nio-7075-exec-5] com.example.demo.CopyController          : Reached index start.
+2020-05-18 12:52:29.271  INFO 7068 --- [http-nio-7075-exec-1] com.example.demo.CopyController          : Start time - 2020/05/18 12:52:29
+2020-05-18 12:52:34.299  INFO 7068 --- [http-nio-7075-exec-1] com.example.model.CopyService            : Job Id - 68
+2020-05-18 12:52:34.303  INFO 7068 --- [http-nio-7075-exec-1] com.example.model.CopyService            : 18-05-2020 12:52:34
+2020-05-18 12:52:37.101  INFO 7068 --- [http-nio-7075-exec-1] com.example.model.CopyService            : Copying Table - JOB_DETAILSfor copyType - CC
+2020-05-18 12:57:25.182 ERROR 7068 --- [http-nio-7075-exec-1] com.example.demo.CopyController          : null
+2020-05-18 12:57:25.346  INFO 7068 --- [Thread-3] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-05-18 12:57:41.999  INFO 15872 --- [main] com.example.demo.DemoApplication         : Starting DemoApplication on DESKTOP-9COS71C with PID 15872 (C:\demoApp\demo\target\classes started by Vishakha in C:\demoApp\demo)
+2020-05-18 12:57:42.002  INFO 15872 --- [main] com.example.demo.DemoApplication         : No active profile set, falling back to default profiles: default
+2020-05-18 12:57:48.406  INFO 15872 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 7075 (http)
+2020-05-18 12:57:48.476  INFO 15872 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-05-18 12:57:48.477  INFO 15872 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.17]
+2020-05-18 12:57:49.668  INFO 15872 --- [main] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2020-05-18 12:57:49.677  INFO 15872 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-05-18 12:57:49.678  INFO 15872 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 7420 ms
+2020-05-18 12:57:50.383  INFO 15872 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-05-18 12:57:51.001  INFO 15872 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2020-05-18 12:57:51.367  INFO 15872 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 7075 (http) with context path ''
+2020-05-18 12:57:51.373  INFO 15872 --- [main] com.example.demo.DemoApplication         : Started DemoApplication in 11.288 seconds (JVM running for 16.474)
+2020-05-18 12:57:52.453  INFO 15872 --- [http-nio-7075-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-05-18 12:57:52.453  INFO 15872 --- [http-nio-7075-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-05-18 12:57:52.468  INFO 15872 --- [http-nio-7075-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 14 ms
+2020-05-18 12:57:52.532  INFO 15872 --- [http-nio-7075-exec-1] com.example.demo.CopyController          : Reached index start.
+2020-05-18 12:58:29.867  INFO 15872 --- [http-nio-7075-exec-6] com.example.demo.CopyController          : Start time - 2020/05/18 12:58:29
+2020-05-18 12:58:37.550  INFO 15872 --- [http-nio-7075-exec-6] com.example.model.CopyService            : Job Id - 69
+2020-05-18 12:58:37.563  INFO 15872 --- [http-nio-7075-exec-6] com.example.model.CopyService            : 18-05-2020 12:58:37
+2020-05-18 12:58:41.383  INFO 15872 --- [http-nio-7075-exec-6] com.example.model.CopyService            : Copying Table - TRADEfor copyType - CC
+2020-05-18 15:48:11.861 ERROR 15872 --- [http-nio-7075-exec-6] com.example.demo.CopyController          : null
+2020-05-18 15:48:12.163  INFO 15872 --- [Thread-3] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-05-18 15:48:40.080  INFO 12348 --- [main] com.example.demo.DemoApplication         : Starting DemoApplication on DESKTOP-9COS71C with PID 12348 (C:\demoApp\demo\target\classes started by Vishakha in C:\demoApp\demo)
+2020-05-18 15:48:40.082  INFO 12348 --- [main] com.example.demo.DemoApplication         : No active profile set, falling back to default profiles: default
+2020-05-18 15:48:47.596  INFO 12348 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 7075 (http)
+2020-05-18 15:48:47.773  INFO 12348 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-05-18 15:48:47.774  INFO 12348 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.17]
+2020-05-18 15:48:48.496  INFO 12348 --- [main] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2020-05-18 15:48:48.503  INFO 12348 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-05-18 15:48:48.504  INFO 12348 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 7944 ms
+2020-05-18 15:48:49.129  INFO 12348 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-05-18 15:48:49.420  INFO 12348 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2020-05-18 15:48:49.675  INFO 12348 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 7075 (http) with context path ''
+2020-05-18 15:48:49.681  INFO 12348 --- [main] com.example.demo.DemoApplication         : Started DemoApplication in 12.827 seconds (JVM running for 20.014)
+2020-05-18 15:49:05.917  INFO 12348 --- [http-nio-7075-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-05-18 15:49:05.918  INFO 12348 --- [http-nio-7075-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-05-18 15:49:05.952  INFO 12348 --- [http-nio-7075-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 33 ms
+2020-05-18 15:49:06.020  INFO 12348 --- [http-nio-7075-exec-2] com.example.demo.CopyController          : Reached index start.
+2020-05-18 15:50:31.733  INFO 12348 --- [http-nio-7075-exec-1] com.example.demo.CopyController          : Entered createSyntheticData
+2020-05-18 15:50:33.789  INFO 12348 --- [http-nio-7075-exec-1] com.example.model.CopyService            : Job Id - 70
+2020-05-18 15:50:33.802  INFO 12348 --- [http-nio-7075-exec-1] com.example.model.CopyService            : 18-05-2020 15:50:33
+2020-05-18 15:56:56.795  INFO 12348 --- [http-nio-7075-exec-1] com.example.demo.CopyController          : End time - 2020/05/18 15:56:56
+2020-05-18 15:56:56.798  INFO 12348 --- [http-nio-7075-exec-4] com.example.demo.CopyController          : Entered createSyntheticData
+2020-05-18 15:56:56.846  INFO 12348 --- [http-nio-7075-exec-4] com.example.model.CopyService            : Job Id - 71
+2020-05-18 15:56:56.851  INFO 12348 --- [http-nio-7075-exec-4] com.example.model.CopyService            : 18-05-2020 15:56:56
+2020-05-18 15:56:58.142  INFO 12348 --- [http-nio-7075-exec-4] com.example.demo.CopyController          : End time - 2020/05/18 15:56:58
+2020-05-18 15:56:58.172 ERROR 12348 --- [http-nio-7075-exec-4] com.example.demo.CopyController          : null
+2020-05-18 15:56:58.202 ERROR 12348 --- [http-nio-7075-exec-4] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.ClassCastException: org.springframework.http.ResponseEntity$DefaultBuilder cannot be cast to org.springframework.http.ResponseEntity] with root cause
+
+java.lang.ClassCastException: org.springframework.http.ResponseEntity$DefaultBuilder cannot be cast to org.springframework.http.ResponseEntity
+	at com.example.demo.CopyController.createSyntheticData(CopyController.java:420) ~[classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_211]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_211]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_211]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_211]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:189) ~[spring-web-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138) ~[spring-web-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102) ~[spring-webmvc-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895) ~[spring-webmvc-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:800) ~[spring-webmvc-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1038) ~[spring-webmvc-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:942) ~[spring-webmvc-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1005) ~[spring-webmvc-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:908) ~[spring-webmvc-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:660) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:882) ~[spring-webmvc-5.1.3.RELEASE.jar:5.1.3.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) ~[tomcat-embed-websocket-9.0.17.jar:9.0.17]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99) ~[spring-web-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:92) ~[spring-web-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:93) ~[spring-web-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200) ~[spring-web-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) ~[spring-web-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:200) ~[tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96) [tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490) [tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139) [tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) [tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) [tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343) [tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408) [tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66) [tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:834) [tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1415) [tomcat-embed-core-9.0.17.jar:9.0.17]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-9.0.17.jar:9.0.17]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [na:1.8.0_211]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [na:1.8.0_211]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-9.0.17.jar:9.0.17]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_211]
+
+2020-05-18 15:57:32.673  INFO 12348 --- [http-nio-7075-exec-6] com.example.demo.CopyController          : Entered createSyntheticData
+2020-05-18 15:57:32.713  INFO 12348 --- [http-nio-7075-exec-6] com.example.model.CopyService            : Job Id - 71
+2020-05-18 15:57:32.715  INFO 12348 --- [http-nio-7075-exec-6] com.example.model.CopyService            : 18-05-2020 15:57:32
+2020-05-18 15:57:33.353  INFO 12348 --- [http-nio-7075-exec-6] com.example.demo.CopyController          : End time - 2020/05/18 15:57:33
+2020-05-18 15:59:43.060  INFO 12348 --- [http-nio-7075-exec-5] com.example.demo.CopyController          : Reached index start.
+2020-05-18 16:00:58.153  INFO 12348 --- [Thread-3] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-05-18 16:01:06.386  INFO 10812 --- [main] com.example.demo.DemoApplication         : Starting DemoApplication on DESKTOP-9COS71C with PID 10812 (C:\demoApp\demo\target\classes started by Vishakha in C:\demoApp\demo)
+2020-05-18 16:01:06.391  INFO 10812 --- [main] com.example.demo.DemoApplication         : No active profile set, falling back to default profiles: default
+2020-05-18 16:01:09.299  INFO 10812 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 7075 (http)
+2020-05-18 16:01:09.414  INFO 10812 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-05-18 16:01:09.416  INFO 10812 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.17]
+2020-05-18 16:01:10.267  INFO 10812 --- [main] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2020-05-18 16:01:10.283  INFO 10812 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-05-18 16:01:10.284  INFO 10812 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 3701 ms
+2020-05-18 16:01:10.639  INFO 10812 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-05-18 16:01:10.901  INFO 10812 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2020-05-18 16:01:11.045  INFO 10812 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 7075 (http) with context path ''
+2020-05-18 16:01:11.049  INFO 10812 --- [main] com.example.demo.DemoApplication         : Started DemoApplication in 6.07 seconds (JVM running for 7.272)
+2020-05-18 16:01:22.248  INFO 10812 --- [http-nio-7075-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-05-18 16:01:22.249  INFO 10812 --- [http-nio-7075-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-05-18 16:01:22.258  INFO 10812 --- [http-nio-7075-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 9 ms
+2020-05-18 16:08:06.282  INFO 10812 --- [http-nio-7075-exec-9] com.example.demo.CopyController          : Entered createSyntheticData
+2020-05-18 16:08:07.397  INFO 10812 --- [http-nio-7075-exec-9] com.example.model.CopyService            : Job Id - 72
+2020-05-18 16:08:07.409  INFO 10812 --- [http-nio-7075-exec-9] com.example.model.CopyService            : 18-05-2020 16:08:07
+2020-05-18 16:08:08.145  INFO 10812 --- [http-nio-7075-exec-9] com.example.demo.CopyController          : End time - 2020/05/18 16:08:08
+2020-05-18 16:10:55.598  INFO 10812 --- [http-nio-7075-exec-5] com.example.demo.CopyController          : Reached index start.
+2020-05-18 16:15:19.010  INFO 10812 --- [http-nio-7075-exec-1] com.example.demo.CopyController          : Entered createSyntheticData
+2020-05-18 16:15:19.062  INFO 10812 --- [http-nio-7075-exec-1] com.example.model.CopyService            : Job Id - 73
+2020-05-18 16:15:19.073  INFO 10812 --- [http-nio-7075-exec-1] com.example.model.CopyService            : 18-05-2020 16:15:19
+2020-05-18 16:15:19.434  INFO 10812 --- [http-nio-7075-exec-1] com.example.demo.CopyController          : End time - 2020/05/18 16:15:19
+2020-05-18 16:15:53.160  INFO 10812 --- [http-nio-7075-exec-2] com.example.demo.CopyController          : Entered createSyntheticData
+2020-05-18 16:15:53.203  INFO 10812 --- [http-nio-7075-exec-2] com.example.model.CopyService            : Job Id - 74
+2020-05-18 16:15:53.206  INFO 10812 --- [http-nio-7075-exec-2] com.example.model.CopyService            : 18-05-2020 16:15:53
+2020-05-18 16:15:54.228  INFO 10812 --- [http-nio-7075-exec-2] com.example.demo.CopyController          : End time - 2020/05/18 16:15:54
+2020-05-18 16:18:56.271 ERROR 10812 --- [http-nio-7075-exec-4] com.example.demo.CopyController          : ORA-01017: invalid username/password; logon denied
+
+2020-05-18 16:19:00.869  INFO 10812 --- [http-nio-7075-exec-5] com.example.demo.CopyController          : Reached index start.
+2020-05-18 16:19:09.530 ERROR 10812 --- [http-nio-7075-exec-2] com.example.demo.CopyController          : ORA-01017: invalid username/password; logon denied
+
+2020-05-18 16:22:07.344  INFO 10812 --- [http-nio-7075-exec-4] com.example.demo.CopyController          : Entered createSyntheticData
+2020-05-18 16:22:07.384  INFO 10812 --- [http-nio-7075-exec-4] com.example.model.CopyService            : Job Id - 75
+2020-05-18 16:22:07.385  INFO 10812 --- [http-nio-7075-exec-4] com.example.model.CopyService            : 18-05-2020 16:22:07
+2020-05-18 16:22:07.967  INFO 10812 --- [http-nio-7075-exec-4] com.example.demo.CopyController          : End time - 2020/05/18 16:22:07
+2020-05-18 16:23:53.980  INFO 10812 --- [http-nio-7075-exec-6] com.example.demo.CopyController          : Reached index start.
+2020-05-18 16:24:50.926  INFO 10812 --- [http-nio-7075-exec-1] com.example.demo.CopyController          : Entered createSyntheticData
+2020-05-18 16:24:50.959  INFO 10812 --- [http-nio-7075-exec-1] com.example.model.CopyService            : Job Id - 76
+2020-05-18 16:24:50.961  INFO 10812 --- [http-nio-7075-exec-1] com.example.model.CopyService            : 18-05-2020 16:24:50
+2020-05-18 16:24:51.510  INFO 10812 --- [http-nio-7075-exec-1] com.example.demo.CopyController          : End time - 2020/05/18 16:24:51
+2020-05-18 16:29:30.126  INFO 10812 --- [http-nio-7075-exec-6] com.example.demo.CopyController          : Entered createSyntheticData
+2020-05-18 16:29:30.145  INFO 10812 --- [http-nio-7075-exec-6] com.example.model.CopyService            : Job Id - 77
+2020-05-18 16:29:30.148  INFO 10812 --- [http-nio-7075-exec-6] com.example.model.CopyService            : 18-05-2020 16:29:30
+2020-05-18 16:29:31.361  INFO 10812 --- [http-nio-7075-exec-6] com.example.demo.CopyController          : End time - 2020/05/18 16:29:31
+2020-05-18 16:31:58.900  INFO 10812 --- [http-nio-7075-exec-6] com.example.demo.CopyController          : Entered createSyntheticData
+2020-05-18 16:31:58.930  INFO 10812 --- [http-nio-7075-exec-6] com.example.model.CopyService            : Job Id - 78
+2020-05-18 16:31:58.931  INFO 10812 --- [http-nio-7075-exec-6] com.example.model.CopyService            : 18-05-2020 16:31:58
+2020-05-18 16:31:59.264  INFO 10812 --- [http-nio-7075-exec-6] com.example.demo.CopyController          : End time - 2020/05/18 16:31:59
+2020-05-18 16:33:40.157  INFO 10812 --- [http-nio-7075-exec-8] com.example.demo.CopyController          : Reached index start.
+2020-05-18 16:35:03.334  INFO 10812 --- [http-nio-7075-exec-3] com.example.demo.CopyController          : Entered createSyntheticData
+2020-05-18 16:35:03.360  INFO 10812 --- [http-nio-7075-exec-3] com.example.model.CopyService            : Job Id - 79
+2020-05-18 16:35:03.361  INFO 10812 --- [http-nio-7075-exec-3] com.example.model.CopyService            : 18-05-2020 16:35:03
+2020-05-18 16:35:03.673  INFO 10812 --- [http-nio-7075-exec-3] com.example.demo.CopyController          : End time - 2020/05/18 16:35:03
+2020-05-18 16:36:42.349  INFO 10812 --- [http-nio-7075-exec-5] com.example.demo.CopyController          : Reached index start.
+2020-05-18 16:37:45.763  INFO 10812 --- [http-nio-7075-exec-4] com.example.demo.CopyController          : Reached index start.
+2020-05-18 16:38:57.018  INFO 10812 --- [http-nio-7075-exec-10] com.example.demo.CopyController          : Entered createSyntheticData
+2020-05-18 16:38:57.050  INFO 10812 --- [http-nio-7075-exec-10] com.example.model.CopyService            : Job Id - 80
+2020-05-18 16:38:57.064  INFO 10812 --- [http-nio-7075-exec-10] com.example.model.CopyService            : 18-05-2020 16:38:57
+2020-05-18 16:38:58.205  INFO 10812 --- [http-nio-7075-exec-10] com.example.demo.CopyController          : End time - 2020/05/18 16:38:58
+2020-05-18 16:41:01.502  INFO 10812 --- [http-nio-7075-exec-1] com.example.demo.CopyController          : Reached index start.
+2020-05-18 16:42:04.614  INFO 10812 --- [http-nio-7075-exec-9] com.example.demo.CopyController          : Reached index start.
+2020-05-18 16:43:14.316  INFO 10812 --- [http-nio-7075-exec-6] com.example.demo.CopyController          : Entered createSyntheticData
+2020-05-18 16:43:14.348  INFO 10812 --- [http-nio-7075-exec-6] com.example.model.CopyService            : Job Id - 81
+2020-05-18 16:43:14.349  INFO 10812 --- [http-nio-7075-exec-6] com.example.model.CopyService            : 18-05-2020 16:43:14
+2020-05-18 16:43:15.564  INFO 10812 --- [http-nio-7075-exec-6] com.example.demo.CopyController          : End time - 2020/05/18 16:43:15
+2020-05-18 16:44:25.194  INFO 10812 --- [http-nio-7075-exec-8] com.example.demo.CopyController          : Entered createSyntheticData
+2020-05-18 16:44:25.225  INFO 10812 --- [http-nio-7075-exec-8] com.example.model.CopyService            : Job Id - 82
+2020-05-18 16:44:25.226  INFO 10812 --- [http-nio-7075-exec-8] com.example.model.CopyService            : 18-05-2020 16:44:25
+2020-05-18 16:44:25.462  INFO 10812 --- [http-nio-7075-exec-8] com.example.demo.CopyController          : End time - 2020/05/18 16:44:25
+2020-05-18 16:47:20.097  INFO 10812 --- [http-nio-7075-exec-1] com.example.demo.CopyController          : Reached index start.
+2020-05-18 16:48:39.683  INFO 10812 --- [http-nio-7075-exec-6] com.example.demo.CopyController          : Entered createSyntheticData
+2020-05-18 16:48:39.703  INFO 10812 --- [http-nio-7075-exec-6] com.example.model.CopyService            : Job Id - 83
+2020-05-18 16:48:39.706  INFO 10812 --- [http-nio-7075-exec-6] com.example.model.CopyService            : 18-05-2020 16:48:39
+2020-05-18 16:48:40.297  INFO 10812 --- [http-nio-7075-exec-6] com.example.demo.CopyController          : End time - 2020/05/18 16:48:40
+2020-05-18 16:51:48.679  INFO 10812 --- [http-nio-7075-exec-8] com.example.demo.CopyController          : Entered createSyntheticData
+2020-05-18 16:51:48.712  INFO 10812 --- [http-nio-7075-exec-8] com.example.model.CopyService            : Job Id - 84
+2020-05-18 16:51:48.713  INFO 10812 --- [http-nio-7075-exec-8] com.example.model.CopyService            : 18-05-2020 16:51:48
+2020-05-18 16:51:50.862  INFO 10812 --- [http-nio-7075-exec-8] com.example.demo.CopyController          : End time - 2020/05/18 16:51:50
+2020-05-18 16:58:21.981  INFO 10812 --- [http-nio-7075-exec-9] com.example.demo.CopyController          : Reached index start.
+2020-05-18 17:01:21.636  INFO 10812 --- [http-nio-7075-exec-6] com.example.demo.CopyController          : Entered createSyntheticData
+2020-05-18 17:01:21.687  INFO 10812 --- [http-nio-7075-exec-6] com.example.model.CopyService            : Job Id - 85
+2020-05-18 17:01:21.693  INFO 10812 --- [http-nio-7075-exec-6] com.example.model.CopyService            : 18-05-2020 17:01:21
+2020-05-18 17:01:22.243  INFO 10812 --- [http-nio-7075-exec-6] com.example.demo.CopyController          : End time - 2020/05/18 17:01:22
+2020-05-18 17:02:20.062  INFO 10812 --- [http-nio-7075-exec-7] com.example.demo.CopyController          : Entered createSyntheticData
+2020-05-18 17:02:20.197  INFO 10812 --- [http-nio-7075-exec-7] com.example.model.CopyService            : Job Id - 86
+2020-05-18 17:02:20.198  INFO 10812 --- [http-nio-7075-exec-7] com.example.model.CopyService            : 18-05-2020 17:02:20
+2020-05-18 17:02:20.515  INFO 10812 --- [http-nio-7075-exec-7] com.example.demo.CopyController          : End time - 2020/05/18 17:02:20
+2020-05-18 17:14:32.869  INFO 10812 --- [http-nio-7075-exec-10] com.example.demo.CopyController          : Entered createSyntheticData
+2020-05-18 17:14:33.043  INFO 10812 --- [http-nio-7075-exec-10] com.example.model.CopyService            : Job Id - 87
+2020-05-18 17:14:33.044  INFO 10812 --- [http-nio-7075-exec-10] com.example.model.CopyService            : 18-05-2020 17:14:33
+2020-05-18 17:14:33.563  INFO 10812 --- [http-nio-7075-exec-10] com.example.demo.CopyController          : End time - 2020/05/18 17:14:33
+2020-05-18 17:19:53.786  INFO 10812 --- [http-nio-7075-exec-1] com.example.demo.CopyController          : Reached index start.
+2020-05-18 17:20:43.637  INFO 10812 --- [http-nio-7075-exec-8] com.example.demo.CopyController          : Reached index start.
+2020-05-18 17:43:16.422  INFO 10812 --- [Thread-3] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-05-18 20:12:08.298  INFO 12564 --- [main] com.example.demo.DemoApplication         : Starting DemoApplication on DESKTOP-9COS71C with PID 12564 (C:\demoApp\demo\target\classes started by Vishakha in C:\demoApp\demo)
+2020-05-18 20:12:08.323  INFO 12564 --- [main] com.example.demo.DemoApplication         : No active profile set, falling back to default profiles: default
+2020-05-18 20:12:10.995  INFO 12564 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 7075 (http)
+2020-05-18 20:12:11.055  INFO 12564 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-05-18 20:12:11.056  INFO 12564 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.17]
+2020-05-18 20:12:11.649  INFO 12564 --- [main] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2020-05-18 20:12:11.657  INFO 12564 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-05-18 20:12:11.659  INFO 12564 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 3168 ms
+2020-05-18 20:12:12.300  INFO 12564 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-05-18 20:12:12.578  INFO 12564 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2020-05-18 20:12:12.776  INFO 12564 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 7075 (http) with context path ''
+2020-05-18 20:12:12.787  INFO 12564 --- [main] com.example.demo.DemoApplication         : Started DemoApplication in 5.341 seconds (JVM running for 7.037)
+2020-05-18 20:13:22.245  INFO 12564 --- [http-nio-7075-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-05-18 20:13:22.246  INFO 12564 --- [http-nio-7075-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-05-18 20:13:22.262  INFO 12564 --- [http-nio-7075-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 15 ms
+2020-05-18 20:13:22.322  INFO 12564 --- [http-nio-7075-exec-1] com.example.demo.CopyController          : Reached index start.
+2020-05-18 20:16:07.910  INFO 12564 --- [http-nio-7075-exec-6] com.example.demo.CopyController          : Start time - 2020/05/18 20:16:07
+2020-05-18 20:16:15.250  INFO 12564 --- [http-nio-7075-exec-6] com.example.model.CopyService            : Job Id - 88
+2020-05-18 20:16:15.261  INFO 12564 --- [http-nio-7075-exec-6] com.example.model.CopyService            : 18-05-2020 20:16:15
+2020-05-18 20:16:17.061  INFO 12564 --- [http-nio-7075-exec-6] com.example.model.CopyService            : Copying Table - TRADE_MASTERfor copyType - CC
+2020-05-18 20:19:36.001 ERROR 12564 --- [http-nio-7075-exec-6] com.example.demo.CopyController          : ORA-00933: SQL command not properly ended
+
+2020-05-18 20:19:36.401  INFO 12564 --- [Thread-3] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-05-18 20:19:44.224  INFO 7880 --- [main] com.example.demo.DemoApplication         : Starting DemoApplication on DESKTOP-9COS71C with PID 7880 (C:\demoApp\demo\target\classes started by Vishakha in C:\demoApp\demo)
+2020-05-18 20:19:44.227  INFO 7880 --- [main] com.example.demo.DemoApplication         : No active profile set, falling back to default profiles: default
+2020-05-18 20:19:47.033  INFO 7880 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 7075 (http)
+2020-05-18 20:19:47.102  INFO 7880 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-05-18 20:19:47.103  INFO 7880 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.17]
+2020-05-18 20:19:47.869  INFO 7880 --- [main] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2020-05-18 20:19:47.877  INFO 7880 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-05-18 20:19:47.878  INFO 7880 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 3503 ms
+2020-05-18 20:19:48.448  INFO 7880 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-05-18 20:19:48.884  INFO 7880 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2020-05-18 20:19:49.199  INFO 7880 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 7075 (http) with context path ''
+2020-05-18 20:19:49.206  INFO 7880 --- [main] com.example.demo.DemoApplication         : Started DemoApplication in 5.997 seconds (JVM running for 7.123)
+2020-05-18 20:21:35.817  INFO 7880 --- [Thread-3] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-05-18 20:21:41.619  INFO 1404 --- [main] com.example.demo.DemoApplication         : Starting DemoApplication on DESKTOP-9COS71C with PID 1404 (C:\demoApp\demo\target\classes started by Vishakha in C:\demoApp\demo)
+2020-05-18 20:21:41.621  INFO 1404 --- [main] com.example.demo.DemoApplication         : No active profile set, falling back to default profiles: default
+2020-05-18 20:21:44.534  INFO 1404 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 7075 (http)
+2020-05-18 20:21:44.820  INFO 1404 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-05-18 20:21:44.822  INFO 1404 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.17]
+2020-05-18 20:21:45.886  INFO 1404 --- [main] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2020-05-18 20:21:45.906  INFO 1404 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-05-18 20:21:45.906  INFO 1404 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 4135 ms
+2020-05-18 20:21:46.332  INFO 1404 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-05-18 20:21:46.762  INFO 1404 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2020-05-18 20:21:47.047  INFO 1404 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 7075 (http) with context path ''
+2020-05-18 20:21:47.053  INFO 1404 --- [main] com.example.demo.DemoApplication         : Started DemoApplication in 6.224 seconds (JVM running for 7.004)
+2020-05-18 20:21:51.958  INFO 1404 --- [http-nio-7075-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-05-18 20:21:51.959  INFO 1404 --- [http-nio-7075-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-05-18 20:21:51.975  INFO 1404 --- [http-nio-7075-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 15 ms
+2020-05-18 20:21:52.031  INFO 1404 --- [http-nio-7075-exec-2] com.example.demo.CopyController          : Reached index start.
+2020-05-18 20:22:51.068  INFO 1404 --- [http-nio-7075-exec-6] com.example.demo.CopyController          : Start time - 2020/05/18 20:22:51
+2020-05-18 20:23:01.029  INFO 1404 --- [http-nio-7075-exec-6] com.example.model.CopyService            : Job Id - 89
+2020-05-18 20:23:01.041  INFO 1404 --- [http-nio-7075-exec-6] com.example.model.CopyService            : 18-05-2020 20:23:01
+2020-05-18 20:23:03.324  INFO 1404 --- [http-nio-7075-exec-6] com.example.model.CopyService            : Copying Table - TRADE_MASTERfor copyType - CC
+2020-05-18 20:25:17.829 ERROR 1404 --- [http-nio-7075-exec-6] com.example.demo.CopyController          : ORA-00923: FROM keyword not found where expected
+
+2020-05-18 20:25:17.888  INFO 1404 --- [Thread-3] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-05-18 20:25:24.033  INFO 10080 --- [main] com.example.demo.DemoApplication         : Starting DemoApplication on DESKTOP-9COS71C with PID 10080 (C:\demoApp\demo\target\classes started by Vishakha in C:\demoApp\demo)
+2020-05-18 20:25:24.036  INFO 10080 --- [main] com.example.demo.DemoApplication         : No active profile set, falling back to default profiles: default
+2020-05-18 20:25:26.305  INFO 10080 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 7075 (http)
+2020-05-18 20:25:26.366  INFO 10080 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-05-18 20:25:26.367  INFO 10080 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.17]
+2020-05-18 20:25:26.905  INFO 10080 --- [main] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2020-05-18 20:25:26.918  INFO 10080 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-05-18 20:25:26.919  INFO 10080 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2767 ms
+2020-05-18 20:25:27.503  INFO 10080 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-05-18 20:25:27.916  INFO 10080 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2020-05-18 20:25:28.146  INFO 10080 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 7075 (http) with context path ''
+2020-05-18 20:25:28.154  INFO 10080 --- [main] com.example.demo.DemoApplication         : Started DemoApplication in 5.135 seconds (JVM running for 5.962)
+2020-05-18 20:25:39.249  INFO 10080 --- [http-nio-7075-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-05-18 20:25:39.250  INFO 10080 --- [http-nio-7075-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-05-18 20:25:39.267  INFO 10080 --- [http-nio-7075-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 16 ms
+2020-05-18 20:26:07.151  INFO 10080 --- [http-nio-7075-exec-5] com.example.demo.CopyController          : Start time - 2020/05/18 20:26:07
+2020-05-18 20:26:12.036  INFO 10080 --- [http-nio-7075-exec-5] com.example.model.CopyService            : Job Id - 90
+2020-05-18 20:26:12.046  INFO 10080 --- [http-nio-7075-exec-5] com.example.model.CopyService            : 18-05-2020 20:26:12
+2020-05-18 20:26:13.452  INFO 10080 --- [http-nio-7075-exec-5] com.example.model.CopyService            : Copying Table - TRADE_MASTERfor copyType - CC
+2020-05-18 20:30:03.221 ERROR 10080 --- [http-nio-7075-exec-5] com.example.demo.CopyController          : null
+2020-05-18 20:30:03.321  INFO 10080 --- [Thread-3] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-05-18 20:30:09.070  INFO 2488 --- [main] com.example.demo.DemoApplication         : Starting DemoApplication on DESKTOP-9COS71C with PID 2488 (C:\demoApp\demo\target\classes started by Vishakha in C:\demoApp\demo)
+2020-05-18 20:30:09.073  INFO 2488 --- [main] com.example.demo.DemoApplication         : No active profile set, falling back to default profiles: default
+2020-05-18 20:30:11.691  INFO 2488 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 7075 (http)
+2020-05-18 20:30:11.722  INFO 2488 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-05-18 20:30:11.723  INFO 2488 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.17]
+2020-05-18 20:30:12.321  INFO 2488 --- [main] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2020-05-18 20:30:12.331  INFO 2488 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-05-18 20:30:12.331  INFO 2488 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 3077 ms
+2020-05-18 20:30:12.788  INFO 2488 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-05-18 20:30:13.067  INFO 2488 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2020-05-18 20:30:13.347  INFO 2488 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 7075 (http) with context path ''
+2020-05-18 20:30:13.357  INFO 2488 --- [main] com.example.demo.DemoApplication         : Started DemoApplication in 5.211 seconds (JVM running for 6.179)
+2020-05-18 20:30:33.343  INFO 2488 --- [http-nio-7075-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-05-18 20:30:33.344  INFO 2488 --- [http-nio-7075-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-05-18 20:30:33.362  INFO 2488 --- [http-nio-7075-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 17 ms
+2020-05-18 20:30:33.430  INFO 2488 --- [http-nio-7075-exec-1] com.example.demo.CopyController          : Reached index start.
+2020-05-18 20:31:12.648  INFO 2488 --- [http-nio-7075-exec-1] com.example.demo.CopyController          : Start time - 2020/05/18 20:31:12
+2020-05-18 20:31:17.569  INFO 2488 --- [http-nio-7075-exec-1] com.example.model.CopyService            : Job Id - 91
+2020-05-18 20:31:17.581  INFO 2488 --- [http-nio-7075-exec-1] com.example.model.CopyService            : 18-05-2020 20:31:17
+2020-05-18 20:31:19.473  INFO 2488 --- [http-nio-7075-exec-1] com.example.model.CopyService            : Copying Table - TRADE_MASTERfor copyType - CC
+2020-05-18 20:43:13.854 ERROR 2488 --- [http-nio-7075-exec-1] com.example.demo.CopyController          : null
+2020-05-18 20:43:14.279  INFO 2488 --- [Thread-3] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
