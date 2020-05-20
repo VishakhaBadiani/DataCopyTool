@@ -252,32 +252,36 @@ $(document).ready(function(){
     });
 
     $('#dashboard-tab').click(function(){
-       var obj=$('#dashtable');
-
-           var dashbody=$('#dashbody');
-            dashbody.empty();
-            $.ajax({
-                type: 'GET',
-                url: '/getAllData',
-                success: function(result) {
-                    console.log('success:',result);
-                    $.each(result,function(i,item){
-                    dashbody.append('<tr>');
-                     dashbody.append('<td>'+item.jobId+'</td><td>'+item.fromDB+'</td>');
-                     dashbody.append ('<td>'+item.fromSchName +'</td><td>'+item.toDB +'</td><td>'+item.toSchName +'</td>')
-                     dashbody.append ('<td>'+item.tableName +'</td><td>'+item.copyType +'</td><td>'+item.createTime +'</td>');
-                     dashbody.append ('<td>'+item.endTime +'</td><td>'+item.status +'</td>');
-                     dashbody.append('</tr>');
-                    });
-                },
-                error: function(result){
-                    console.log('failure',result);
-                    alert("System Error. Please contact admin");
-
-                }
-             });
+            getData();
 
         });
+
+        function getData(){
+        var obj=$('#dashtable');
+
+                   var dashbody=$('#dashbody');
+                    dashbody.empty();
+                    $.ajax({
+                        type: 'GET',
+                        url: '/getAllData',
+                        success: function(result) {
+                            console.log('success:',result);
+                            $.each(result,function(i,item){
+                            dashbody.append('<tr>');
+                             dashbody.append('<td>'+item.jobId+'</td><td>'+item.fromDB+'</td>');
+                             dashbody.append ('<td>'+item.fromSchName +'</td><td>'+item.toDB +'</td><td>'+item.toSchName +'</td>')
+                             dashbody.append ('<td>'+item.tableName +'</td><td>'+item.copyType +'</td><td>'+item.createTime +'</td>');
+                             dashbody.append ('<td>'+item.endTime +'</td><td>'+item.status +'</td>');
+                             dashbody.append('</tr>');
+                            });
+                        },
+                        error: function(result){
+                            console.log('failure',result);
+                            alert("System Error. Please contact admin");
+
+                        }
+                     });
+        }
 
         loadSyntheticDataPage();
 
@@ -768,6 +772,7 @@ $(document).ready(function(){
         alert("Request sent for processing.");
 
         document.getElementById("SynForm").reset();
+        getData();
         $('#dashboard-tab').tab('show');
 
         console.log("Reached");
@@ -783,14 +788,14 @@ $(document).ready(function(){
         console.log($('#SynFC option:selected').text() + ' : ' + $('#SynFC option:selected').text());
         if ($('#SynFC option:selected').text() == 'random'){
            console.log("Inside #SynFC option:selected");
-           $('#SynFV').val = '';
+           $('#SynFV').val('');
            $('#SynFV').prop('disabled',true);
            $('#SynSaveFCSubmit').focus();
 
         } else{
             console.log("Inside #SynFV show");
             $('#SynFV').prop('disabled',false);
-            $('#SynFV').val = '';
+            $('#SynFV').val('');
             $('#SynFV').focus();
         }
 
