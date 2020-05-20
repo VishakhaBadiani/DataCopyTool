@@ -14,10 +14,17 @@ var gJoinFreezed=false;
 var gSCFreezed=false;
 var finalJoins;
 var finalSynthetic;
+var data_len;
+var data_type;
 
 $(document).ready(function(){
     console.log('document is loaded');
 
+    $("#fDBName,#tDBName,#fSName,#tSName,#tableName," +
+      "#copyType,#Partition,#SynDBNameCon,#SynSchName1," +
+      "#SynTabName1,#SynColName1,#SynSchName2,#SynTabName2," +
+      "#SynColName2,#SynSchFltName,#SynTabFltName,#SynColFltName,#SynFC")
+      .select2();
 
     $('#headingTwo').click(function(){
         $('#collapseTwo').toggle();
@@ -28,7 +35,7 @@ $(document).ready(function(){
     $('#part').hide();
     $('#Qry').hide();
 
-    $('#copyType').click(function(){
+    $('#copyType').change(function(){
         var ctype=$('#copyType').val();
         if(ctype=='TC'){
             $('#part').hide();
@@ -1204,4 +1211,77 @@ function handleClick(cb){
       $('#SynMR').prop('disabled',false);
     }
   }
+
+$('#SynColFltName').change(function(){
+        var SynTbNm = $('#SynTabFltName option:selected').text();
+        var SynClNm = $('#SynColFltName option:selected').text();
+        $.get("/getLengthAndType/" +  SynTbNm  + "/" +  SynClNm).done(function(response){
+            console.log(response);
+            data_len = response[0];
+            $('#SynDL').val(data_len);
+            data_type = response[1];
+            $('#SynDT').val(data_type);
+            });
+        /*$.get("/getDataType/" +  SynTbNm  + "/" +  SynClNm).done(function(response){
+            console.log(response);
+             data_type= response;
+             $('#SynDT').val(data_type);
+            });*/
+    });
+
+    $('#SynFV').on('keyup', function() {
+        limitText(this, data_len)
+    });
+
+function limitText(field, maxChar){
+ var ref = $(field),
+ val = ref.val();
+ if ( val.length >= maxChar ){
+  ref.val(function() {
+  console.log(val.substr(0, maxChar))
+  return val.substr(0, maxChar);
+  });
+ }
+}
+
+$("#SynFV").keypress(data_type,function (e) {
+    var keyCode = e.keyCode || e.which;
+
+    //$("#SynFV").html("");
+
+    //Regex for Valid Characters i.e. Alphabets and Numbers.
+    var regex = /^[A-Za-z0-9]+$/;
+    var regex_char = /^[a-zA-Z]+$"/;
+    var numbers = /^[0-9]+$/;
+
+    //Validate TextBox value against the Regex.
+    var isValid = regex.test(String.fromCharCode(keyCode));
+    var isValid_Char = regex_char.test(String.fromCharCode(keyCode));
+    var isValid_no = numbers.test(String.fromCharCode(keyCode));
+
+    switch(data_type){
+        case "VARCHAR2":
+            if(isValid_no || !isValid){
+                 // $("#SynFV").html("Only Alphabets allowed.");
+                  alert("Only Alphabets allowed.");
+                  return false;
+            }
+        break;
+        case "NUMBER":
+            if(isValid_Char || !isValid){
+                //$("#SynFV").html("Only Numbers allowed.");
+                alert("Only Numbers allowed.");
+                return false;
+            }
+
+    }
+
+    /*if (!isValid) {
+        $("#SynFV").html("Only Alphabets and Numbers allowed.");
+        alert("Only Alphabets and Numbers allowed.");
+    }
+    return isValid;*/
+});
+
+
 

@@ -422,4 +422,43 @@ public class CopyController {
             }
     }
 
+    @GetMapping(value = "/getLengthAndType/{table}/{column}", produces = "application/json")
+    public ResponseEntity<List<String>> getLength(@PathVariable("table") String table, @PathVariable("column") String column) {
+        List<String> colDetails = new ArrayList<String>();
+        try {
+            Statement st = connThrough.createStatement();
+            ResultSet rs = st.executeQuery("select data_length from user_tab_columns where table_name = '"+table.toUpperCase()+"' and column_name='"+column.toUpperCase()+"'");
+            while (rs.next()) {
+                colDetails.add(String.valueOf(rs.getInt(1)));
+                System.out.println("Column Length - > "+String.valueOf(rs.getInt(1)));
+            }
+            rs = st.executeQuery("select data_type from user_tab_columns where table_name = '"+table.toUpperCase()+"' and column_name='"+column.toUpperCase()+"'");
+            while (rs.next()) {
+                colDetails.add(rs.getString(1));
+                System.out.println("Column Type - > "+rs.getString(1));
+            }
+            return ResponseEntity.status(HttpStatus.OK).body(colDetails);
+        } catch (Exception e) {
+            logger.error(e.getMessage(),e.getStackTrace());
+            return (ResponseEntity<List<String>>) ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /*@GetMapping(value = "/getDataType/{table}/{column}", produces = "application/json")
+    public ResponseEntity<String> getDataType(@PathVariable("table") String table, @PathVariable("column") String column) {
+        String colType = null;
+        try {
+            Statement st = connThrough.createStatement();
+            ResultSet rs = st.executeQuery("select data_type from user_tab_columns where table_name = '"+table.toUpperCase()+"' and column_name='"+column.toUpperCase()+"'");
+            while (rs.next()) {
+                colType=rs.getString(1);
+                System.out.println("Column Type - > "+colType);
+            }
+            return ResponseEntity.status(HttpStatus.OK).body(colType);
+        } catch (Exception e) {
+            logger.error(e.getMessage(),e.getStackTrace());
+            return (ResponseEntity<String>) ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }*/
+
 }

@@ -19,7 +19,7 @@ a{
 {
 
    margin-bottom: 2px;
-    background-image: url(/resources/img/header1.png);
+    background-image: url(/resources/static/img/header1.png);
    background-size:100%;
    background-repeat: no-repeat;
    height: 70px;
@@ -53,5 +53,8 @@ a{
       border: .5px solid #ddd;
 
 }
+.input-group-text{    height: 28px;
+}
 
-
+#tPWD, #fPWD, #SynUsrCon, #SynPassCon, #SynMRf, #SynMR, #SynFV{    height: 28px;
+}

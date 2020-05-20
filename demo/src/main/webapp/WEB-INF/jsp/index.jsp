@@ -9,8 +9,9 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <link rel="stylesheet" href="/resources/css/style.css">
-  <link rel="icon" type="image/png" href="/resources/img/favicon-32x32.png">
+  <link rel="stylesheet" href="/resources/static/css/style.css">
+  <link rel="stylesheet" href="/resources/static/css/select2.min.css">
+  <link rel="icon" type="image/png" href="/resources/static/img/favicon-32x32.png">
 
   <title>Data Copy Tool!</title>
 
@@ -326,7 +327,7 @@
         <div class="col">
           <div class="input-group mb-3">
             <div class="input-group-prepend">
-              <label class="input-group-text" for="inputGroupSelect01">Schema:</label>
+              <label class="input-group-text" for="inputGroupSelect01" style="width: 143px;">Schema:</label>
             </div>
             <select class="custom-select" id="SynSchName1">
             </select>
@@ -335,7 +336,7 @@
         <div class="col">
           <div class="input-group mb-3">
             <div class="input-group-prepend">
-              <label class="input-group-text" for="inputGroupSelect01">Table:</label>
+              <label class="input-group-text" for="inputGroupSelect01" style="width: 143px;">Table:</label>
             </div>
             <select class="custom-select" id="SynTabName1">
               <option selected>Choose...</option>
@@ -346,7 +347,7 @@
         <div class="col">
           <div class="input-group mb-3">
             <div class="input-group-prepend">
-              <label class="input-group-text" for="inputGroupSelect01">Column:</label>
+              <label class="input-group-text" for="inputGroupSelect01" style="width: 143px;">Column:</label>
             </div>
             <select class="custom-select" id="SynColName1">
               <option selected>Choose...</option>
@@ -379,7 +380,7 @@
         <div class="col">
           <div class="input-group mb-3">
             <div class="input-group-prepend">
-              <label class="input-group-text" for="inputGroupSelect01">Related Schema:</label>
+              <label class="input-group-text" for="inputGroupSelect01" style="width: 143px;">Related Schema:</label>
             </div>
             <select class="custom-select" id="SynSchName2">
               <option selected>Choose...</option>
@@ -389,7 +390,7 @@
         <div class="col">
           <div class="input-group mb-3">
             <div class="input-group-prepend">
-              <label class="input-group-text" for="inputGroupSelect01">Related Table:</label>
+              <label class="input-group-text" for="inputGroupSelect01" style="width: 143px;">Related Table:</label>
             </div>
             <select class="custom-select" id="SynTabName2">
               <option selected>Choose...</option>
@@ -399,7 +400,7 @@
         <div class="col">
           <div class="input-group mb-3">
             <div class="input-group-prepend">
-              <label class="input-group-text" for="inputGroupSelect01">Related Column:</label>
+              <label class="input-group-text" for="inputGroupSelect01" style="width: 143px;">Related Column:</label>
             </div>
             <select class="custom-select" id="SynColName2">
               <option selected>Choose...</option>
@@ -498,6 +499,23 @@
             </select>
           </div> <!--class="input-group mb-3"-->
         </div> <!--div class="col"-->
+        <div class="col-4">
+            <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">Data Length:</label>
+            </div>
+            <input type="text" id="SynDL" class="form-control" aria-label="FilterValue" aria-describedby="basic-addon1" disabled>
+           </div> <!--class="input-group mb-3"-->
+           </div> <!--div class="col"-->
+           <div class="col-4">
+               <div class="input-group mb-3">
+                 <div class="input-group-prepend">
+                   <label class="input-group-text" for="inputGroupSelect01">Data Type:</label>
+                 </div>
+                 <input type="text" id="SynDT" class="form-control" aria-label="FilterValue" aria-describedby="basic-addon1" disabled>
+          </div> <!--class="input-group mb-3"-->
+        </div> <!--div class="col"-->
+
     </div>  <!--div class="row"-->
 
       <div class="row" id="SynRow14">
@@ -614,6 +632,6 @@
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
   <script type="text/javascript" src="/resources/static/js/copyDB.js"></script>
-
+  <script type="text/javascript" src="/resources/static/js/select2.min.js"></script>
 </body>
 </html>

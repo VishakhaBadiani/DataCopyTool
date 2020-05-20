@@ -85,21 +85,22 @@ public class CopyService {
             builder1 = new ProcessBuilder(oraPath + "\\BIN\\exp",
                     user+"/"+password+"@"+fromSid, "tables="+tableName, "file="+jobId+".dmp", "direct=y", "log="+jobId+"_export.txt");
         }else if(copyType.equalsIgnoreCase("PC")){
-            /*builder1 = new ProcessBuilder(oraPath + "\\BIN\\exp",
-                    user+"/"+password+"@"+fromSid, "tables="+tableName+":"+partition, "file="+jobId+".dmp", "direct=y", "log="+jobId+"_export.txt");*/
-            builder1 = new ProcessBuilder(oraPath + "\\BIN\\expdp",
-                    user+"/"+password+"@"+fromSid, "tables="+tableName+":"+partition, "dumpfile="+tableName+"_"+partition+".dmp", "logfile="+jobId+"_export.txt");
+            builder1 = new ProcessBuilder(oraPath + "\\BIN\\exp",
+                    user+"/"+password+"@"+fromSid, "tables="+tableName+":"+partition, "file="+jobId+".dmp", "direct=y", "log="+jobId+"_export.txt");
+            //Suneja's command below
+            /*builder1 = new ProcessBuilder(oraPath + "\\BIN\\expdp",
+                    user+"/"+password+"@"+fromSid, "tables="+tableName+":"+partition, "dumpfile="+tableName+"_"+partition+".dmp", "logfile="+jobId+"_export.txt");*/
         }else if(copyType.equalsIgnoreCase("CC")){
-            /*Formatter x= new Formatter(dmpFilePath + "\\copy.par");
+            Formatter x= new Formatter(dmpFilePath + "\\copy.par");
             x.format("tables="+tableName);
             x.format(" file="+jobId+".dmp");
             x.format(" log="+jobId+"_export.txt");
             x.format(" query="+textArea);
             x.close();
             builder1 = new ProcessBuilder(oraPath + "\\BIN\\exp",
-                    user+"/"+password+"@"+fromSid, "parfile=copy.par");*/
+                    user+"/"+password+"@"+fromSid, "parfile=copy.par");
 
-            Statement st = conn.createStatement();
+            /*Statement st = conn.createStatement();
             st.executeQuery("DELETE FROM PLAN_TABLE WHERE STATEMENT_ID = 'st1'");
             st.executeUpdate("BEGIN EXECUTE IMMEDIATE 'EXPLAIN PLAN SET STATEMENT_ID = ''st1'' FOR "+textArea+"'; END;");
             String sql = "WITH OBJ_NAME AS (SELECT a.object_name,object_alias,rn,LISTAGG (b.COLUMN_NAME, ',') WITHIN GROUP (ORDER BY b.COLUMN_NAME)    col,\n" +
@@ -125,7 +126,7 @@ public class CopyService {
             while(rs.next()){
                 System.out.println(rs.getString(1));
             }
-
+*/
         }
         builder1.directory(new File(dmpFilePath));
         builder1.environment().put("ORACLE_HOME", oraPath);
