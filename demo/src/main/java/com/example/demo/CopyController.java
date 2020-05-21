@@ -40,6 +40,7 @@ public class CopyController {
     private static final Logger logger = LoggerFactory.getLogger(CopyController.class);
     Connection conFromDb, conToDb, connThrough;
     String fromUser, toUser, connThroughUser, connectThroughDb, fromSid, toSid;
+    int jobIdforSyn;
 
     String dctPath = System.getenv("DCT_HOME") + "\\Files\\";
   
@@ -361,7 +362,7 @@ public class CopyController {
         int count1 = 0, count2 = 0;
         try {
             callStmt = (OracleCallableStatement) connThrough.prepareCall("{call PKG_SYNTHETIC_DATA.create_syn_data(?,?,?)}");
-            int jobId = copyService.writeToFile(connectThroughDb, connThroughUser, "NA", "NA", "NA", "SDC");
+             jobIdforSyn = copyService.writeToFile(connectThroughDb, connThroughUser, "NA", "NA", "NA", "SDC");
              ObjectMapper objectMapper = new ObjectMapper();
              ObjectMapper objectMapper2 = new ObjectMapper();
              objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);             
@@ -384,7 +385,7 @@ public class CopyController {
                 structProject1 = new STRUCT(projectTypeDesc, connThrough, obj);
                 structArrayOfProjects1[count1] = structProject1;
                 count1++;
-            }             
+            }
              JsonNode synCriteriaNode = dataWrapNode.path("SyntheticCriteria");   
              Iterator<JsonNode> elements2 = synCriteriaNode.elements();             
              while (elements2.hasNext()) {
@@ -414,9 +415,10 @@ public class CopyController {
                 now = LocalDateTime.now();
                 System.out.println("End time - " + dtf.format(now));
                 logger.info("End time - " + dtf.format(now));
-                copyService.updateFileStatus(jobId, "Completed");
+                copyService.updateFileStatus(jobIdforSyn, "Completed");
                 return ResponseEntity.status(HttpStatus.OK).body("true");
             } catch (Exception e) {
+                copyService.updateFileStatus(jobIdforSyn, "Failed");
                 logger.error(e.getMessage(),e.getStackTrace());
                 return (ResponseEntity<String>) ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR);
             }
@@ -443,22 +445,5 @@ public class CopyController {
             return (ResponseEntity<List<String>>) ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-    /*@GetMapping(value = "/getDataType/{table}/{column}", produces = "application/json")
-    public ResponseEntity<String> getDataType(@PathVariable("table") String table, @PathVariable("column") String column) {
-        String colType = null;
-        try {
-            Statement st = connThrough.createStatement();
-            ResultSet rs = st.executeQuery("select data_type from user_tab_columns where table_name = '"+table.toUpperCase()+"' and column_name='"+column.toUpperCase()+"'");
-            while (rs.next()) {
-                colType=rs.getString(1);
-                System.out.println("Column Type - > "+colType);
-            }
-            return ResponseEntity.status(HttpStatus.OK).body(colType);
-        } catch (Exception e) {
-            logger.error(e.getMessage(),e.getStackTrace());
-            return (ResponseEntity<String>) ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }*/
 
 }
