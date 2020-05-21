@@ -575,6 +575,10 @@ $(document).ready(function(){
         var valT = [];
         var SynScNm = $('#SynSchFltName option:selected').text();
         $('#SynTabFltName').empty();
+        $('#SynColFltName').empty();
+        $('#SynFV').val('');
+        $('#SynDL').val('');
+        $('#SynDT').val('');
         $('#SynTabFltName').append("<option value='' selected>--Select--</option>");
 
         $('#SynJoinTab-body tr').each(function(index, value){
@@ -609,6 +613,9 @@ $(document).ready(function(){
             console.log(response);
 
             $('#SynColFltName').empty();
+            $('#SynFV').val('');
+            $('#SynDL').val('');
+            $('#SynDT').val('');
             $('#SynColFltName').append("<option value='' selected>--Select--</option>");
             $.each(response,function(index, value){
                 console.log(value);
@@ -635,6 +642,14 @@ $(document).ready(function(){
         }
         else if($('#SynColFltName option:selected').text() == "--Select--"){
             alert("Please choose a Column option! ");
+            return false;
+        }
+        else if($('#SynFC').val() == 'Choose...'){
+            alert("Please enter Synthetic Criteria! ");
+            return false;
+        }
+        else if($('#SynFV').val() == '' && $('#SynFC').val() != 'random'){
+            alert("Please enter Synthetic Value! ");
             return false;
         }
         else {
@@ -772,6 +787,7 @@ $(document).ready(function(){
         alert("Request sent for processing.");
 
         document.getElementById("SynForm").reset();
+        synReset();
         getData();
         $('#dashboard-tab').tab('show');
 
@@ -1220,6 +1236,9 @@ function handleClick(cb){
 $('#SynColFltName').change(function(){
         var SynTbNm = $('#SynTabFltName option:selected').text();
         var SynClNm = $('#SynColFltName option:selected').text();
+        $('#SynFV').val('');
+        $('#SynDL').val('');
+        $('#SynDT').val('');
         $.get("/getLengthAndType/" +  SynTbNm  + "/" +  SynClNm).done(function(response){
             console.log(response);
             data_len = response[0];
@@ -1256,7 +1275,7 @@ $("#SynFV").keypress(data_type,function (e) {
 
     //Regex for Valid Characters i.e. Alphabets and Numbers.
     var regex = /^[A-Za-z0-9]+$/;
-    var regex_char = /^[a-zA-Z]+$"/;
+    var regex_char = /^[a-zA-Z]+$/;
     var numbers = /^[0-9]+$/;
 
     //Validate TextBox value against the Regex.
