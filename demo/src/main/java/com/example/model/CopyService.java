@@ -127,21 +127,24 @@ public class CopyService {
                         " WHERE OJ.RN = X.LVL";
                 ResultSet objNames=objNameSt.executeQuery("select object_name from obj_name order by object_alias");
                 List<String> objNameList= new ArrayList<String>();
-                String tables="";
+                String tablesForExport="";
+                String tablesForImport="";
                 while(objNames.next()){
                     objNameList.add(objNames.getString(1));
-                    if("".equalsIgnoreCase(tables)){
-                        tables="IN ('"+objNames.getString(1)+"'";
+                    if("".equalsIgnoreCase(tablesForExport)){
+                        tablesForExport="IN ('"+objNames.getString(1)+"'";
+                        tablesForImport= objNames.getString(1);
                     }else{
-                        tables=tables+",'"+objNames.getString(1)+"'";
+                        tablesForExport=tablesForExport+",'"+objNames.getString(1)+"'";
+                        tablesForImport=tablesForImport+":"+objNames.getString(1);
                     }
                 }
-                tables=tables+")";
+                tablesForExport=tablesForExport+")";
                 ResultSet rs = st.executeQuery(sql);
                 Formatter x= new Formatter(dmpFilePath + "\\"+jobId+"_export.par");
                 x.format("dumpfile="+jobId+".dmp");
                 x.format(" logfile="+jobId+"_export.txt");
-                x.format(" include=TABLE:\""+tables+"\"");
+                x.format(" include=TABLE:\""+tablesForExport+"\"");
                 while(rs.next()){
                     x.format(" query="+objNameList.get(customizedCopyCounter)+":\""+rs.getString(1)+"\"");
                     customizedCopyCounter++;
@@ -149,9 +152,9 @@ public class CopyService {
                 x.close();
                 Formatter y= new Formatter(dmpFilePath + "\\"+jobId+"_import.par");
                 y.format("dumpfile="+jobId+".dmp");
-                y.format(" logfile="+jobId+"_export.txt");
+                y.format(" logfile="+jobId+"_import.txt");
                 y.format(" table_exists_action=append");
-                y.format(" remap_schema=demo:hr");
+                y.format(" remap_schema="+tablesForImport);
                 y.close();
                 builder1 = new ProcessBuilder(oraPath + "\\BIN\\expdp",
                         user+"/"+password+"@"+fromSid, "parfile="+jobId+"_export.par", "directory=DCT_DIR");
@@ -208,8 +211,8 @@ public class CopyService {
             Process p = null;
             ProcessBuilder builder1;
             if ("CC".equalsIgnoreCase(copyType)) {
-                builder1 = new ProcessBuilder(oraPath + "\\BIN\\imp", toSch+"/"+toPwd+"@"+toSid, "file="+jobId+".dmp",
-                        "full=y", "log="+jobId+"_import.txt", "ignore=y");
+                builder1 = new ProcessBuilder(oraPath + "\\BIN\\impdp",
+                        toSch+"/"+toPwd+"@"+toSid, "parfile="+jobId+"_import.par", "directory=DCT_DIR");
             }else{
                 builder1 = new ProcessBuilder(oraPath + "\\BIN\\imp", toSch+"/"+toPwd+"@"+toSid, "file="+jobId+".dmp",
                         "full=y", "log="+jobId+"_import.txt", "ignore=y");
