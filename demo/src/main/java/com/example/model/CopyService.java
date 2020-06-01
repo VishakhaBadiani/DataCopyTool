@@ -102,7 +102,6 @@ public class CopyService {
                         user+"/"+password+"@"+fromSid, "parfile=copy.par");*/
 
                 int customizedCopyCounter=0;
-                Statement objNameSt = conn.createStatement();
                 Statement st = conn.createStatement();
                 st.executeQuery("DELETE FROM PLAN_TABLE WHERE STATEMENT_ID = 'st1'");
                 st.executeUpdate("BEGIN EXECUTE IMMEDIATE 'EXPLAIN PLAN SET STATEMENT_ID = ''st1'' FOR "+textArea+"'; END;");
@@ -112,7 +111,7 @@ public class CopyService {
                         "                          ROWNUM RN FROM PLAN_TABLE P\n" +
                         "           WHERE     P.OBJECT_NAME IS NOT NULL AND P.OBJECT_NAME NOT LIKE 'SYS%' AND OBJECT_OWNER <> 'SYS') a, user_tab_columns b\n" +
                         "   WHERE a.object_name = b.table_name GROUP BY a.object_name, object_alias, rn) " +
-                        "SELECT    'WHERE ('||col||') IN (SELECT DISTINCT ' || col_ALIAS || ' FROM ' || (SELECT LISTAGG (ojn.OBJECT_NAME || ' ' || ojn.OBJECT_ALIAS, ', ')" +
+                        "SELECT    object_name, 'WHERE ('||col||') IN (SELECT DISTINCT ' || col_ALIAS || ' FROM ' || (SELECT LISTAGG (ojn.OBJECT_NAME || ' ' || ojn.OBJECT_ALIAS, ', ')" +
                         " WITHIN GROUP (ORDER BY ojn.OBJECT_NAME || ' ' || ojn.OBJECT_ALIAS) FROM OBJ_NAME ojn)\n" +
                         "       || CASE WHEN (SELECT DISTINCT LISTAGG (REPLACE (NVL (ACCESS_PREDICATES, FILTER_PREDICATES),'\"',NULL), ' AND ') WITHIN GROUP (ORDER BY NVL (ACCESS_PREDICATES, FILTER_PREDICATES)) FROM PLAN_TABLE\n" +
                         "                     WHERE STATEMENT_ID = 'st1' AND NVL (ACCESS_PREDICATES, FILTER_PREDICATES) IS NOT NULL) IS NOT NULL\n" +
@@ -125,37 +124,23 @@ public class CopyService {
                         "              FROM DUAL\n" +
                         "        CONNECT BY LEVEL <= (SELECT COUNT (*) FROM OBJ_NAME)) X\n" +
                         " WHERE OJ.RN = X.LVL";
-                ResultSet objNames=objNameSt.executeQuery("select object_name from obj_name order by object_alias");
-                List<String> objNameList= new ArrayList<String>();
-                String tablesForExport="";
-                String tablesForImport="";
-                while(objNames.next()){
-                    objNameList.add(objNames.getString(1));
-                    if("".equalsIgnoreCase(tablesForExport)){
-                        tablesForExport="IN ('"+objNames.getString(1)+"'";
-                        tablesForImport= objNames.getString(1);
-                    }else{
-                        tablesForExport=tablesForExport+",'"+objNames.getString(1)+"'";
-                        tablesForImport=tablesForImport+":"+objNames.getString(1);
-                    }
-                }
-                tablesForExport=tablesForExport+")";
                 ResultSet rs = st.executeQuery(sql);
+                String tablesForExport="";
                 Formatter x= new Formatter(dmpFilePath + "\\"+jobId+"_export.par");
                 x.format("dumpfile="+jobId+".dmp");
                 x.format(" logfile="+jobId+"_export.txt");
-                x.format(" include=TABLE:\""+tablesForExport+"\"");
                 while(rs.next()){
-                    x.format(" query="+objNameList.get(customizedCopyCounter)+":\""+rs.getString(1)+"\"");
+                    x.format(" query="+rs.getString(1)+":\""+rs.getString(2)+"\"");
+                    if("".equalsIgnoreCase(tablesForExport)){
+                        tablesForExport="IN ('"+rs.getString(1)+"'";
+                    }else{
+                        tablesForExport=tablesForExport+",'"+rs.getString(1)+"'";
+                    }
                     customizedCopyCounter++;
                 }
+                tablesForExport=tablesForExport+")";
+                x.format(" include=TABLE:\""+tablesForExport+"\"");
                 x.close();
-                Formatter y= new Formatter(dmpFilePath + "\\"+jobId+"_import.par");
-                y.format("dumpfile="+jobId+".dmp");
-                y.format(" logfile="+jobId+"_import.txt");
-                y.format(" table_exists_action=append");
-                y.format(" remap_schema="+tablesForImport);
-                y.close();
                 builder1 = new ProcessBuilder(oraPath + "\\BIN\\expdp",
                         user+"/"+password+"@"+fromSid, "parfile="+jobId+"_export.par", "directory=DCT_DIR");
 
@@ -202,7 +187,7 @@ public class CopyService {
         }
     }
 
-    public void importData(String toSch, String toPwd, String toDB, int jobId, String toSid, String copyType){
+    public void importData(String toSch, String toPwd, String toDB, int jobId, String toSid, String copyType, String fromSch){
         try{
             wb = WorkbookFactory.create(new FileInputStream(excelFilePath));
             Sheet firstSheet = wb.getSheetAt(0);
@@ -211,6 +196,12 @@ public class CopyService {
             Process p = null;
             ProcessBuilder builder1;
             if ("CC".equalsIgnoreCase(copyType)) {
+                Formatter y= new Formatter(dmpFilePath + "\\"+jobId+"_import.par");
+                y.format("dumpfile="+jobId+".dmp");
+                y.format(" logfile="+jobId+"_import.txt");
+                y.format(" table_exists_action=append");
+                y.format(" remap_schema="+fromSch+":"+toSch);
+                y.close();
                 builder1 = new ProcessBuilder(oraPath + "\\BIN\\impdp",
                         toSch+"/"+toPwd+"@"+toSid, "parfile="+jobId+"_import.par", "directory=DCT_DIR");
             }else{
