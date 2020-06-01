@@ -84,7 +84,7 @@ public class CopyController {
             copyService.export(jobDetails.getFromSchName(), jobDetails.getFromPWD(), jobDetails.getFromDB(), jobDetails.getTableName(), jobId, jobDetails.getCopyType(), jobDetails.getPartition(), jobDetails.getTextArea(), fromSid, conFromDb);
             /*CryptoUtils.encrypt(key, inputFile, encryptedFile);
             CryptoUtils.decrypt(key, encryptedFile, decryptedFile);*/
-            copyService.importData(jobDetails.getToSchName(), jobDetails.getToPWD(), jobDetails.getToDB(), jobId, toSid);
+            copyService.importData(jobDetails.getToSchName(), jobDetails.getToPWD(), jobDetails.getToDB(), jobId, toSid, jobDetails.getCopyType());
             CryptoUtils.encrypt(key, inputFile, encryptedFile);
             copyService.deleteFile(jobId);
             now = LocalDateTime.now();

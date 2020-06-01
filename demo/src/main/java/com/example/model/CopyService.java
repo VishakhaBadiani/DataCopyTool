@@ -76,64 +76,93 @@ public class CopyService {
         }
         return jobId;
     }
-    public void export(String user, String password, String fromDb, String tableName, int jobId, String copyType, String partition, String textArea, String fromSid, Connection conn) throws IOException, SQLException {
+    public void export(String user, String password, String fromDb, String tableName, int jobId, String copyType, String partition, String textArea, String fromSid, Connection conn) {
         System.out.println("Copying Table - "+tableName +"for copyType - "+copyType);
         logger.info("Copying Table - "+tableName +"for copyType - "+copyType);
-        Process p = null;
-        ProcessBuilder builder1 = null;
-        if(copyType.equalsIgnoreCase("TC")){
-            builder1 = new ProcessBuilder(oraPath + "\\BIN\\exp",
-                    user+"/"+password+"@"+fromSid, "tables="+tableName, "file="+jobId+".dmp", "direct=y", "log="+jobId+"_export.txt");
-        }else if(copyType.equalsIgnoreCase("PC")){
-            builder1 = new ProcessBuilder(oraPath + "\\BIN\\exp",
-                    user+"/"+password+"@"+fromSid, "tables="+tableName+":"+partition, "file="+jobId+".dmp", "direct=y", "log="+jobId+"_export.txt");
-            //Suneja's command below
-            /*builder1 = new ProcessBuilder(oraPath + "\\BIN\\expdp",
-                    user+"/"+password+"@"+fromSid, "tables="+tableName+":"+partition, "dumpfile="+tableName+"_"+partition+".dmp", "logfile="+jobId+"_export.txt");*/
-        }else if(copyType.equalsIgnoreCase("CC")){
-            Formatter x= new Formatter(dmpFilePath + "\\copy.par");
-            x.format("tables="+tableName);
-            x.format(" file="+jobId+".dmp");
-            x.format(" log="+jobId+"_export.txt");
-            x.format(" query="+textArea);
-            x.close();
-            builder1 = new ProcessBuilder(oraPath + "\\BIN\\exp",
-                    user+"/"+password+"@"+fromSid, "parfile=copy.par");
-
-            /*Statement st = conn.createStatement();
-            st.executeQuery("DELETE FROM PLAN_TABLE WHERE STATEMENT_ID = 'st1'");
-            st.executeUpdate("BEGIN EXECUTE IMMEDIATE 'EXPLAIN PLAN SET STATEMENT_ID = ''st1'' FOR "+textArea+"'; END;");
-            String sql = "WITH OBJ_NAME AS (SELECT a.object_name,object_alias,rn,LISTAGG (b.COLUMN_NAME, ',') WITHIN GROUP (ORDER BY b.COLUMN_NAME)    col,\n" +
-                    "         LISTAGG (object_alias||'.'||b.COLUMN_NAME, ',') WITHIN GROUP (ORDER BY b.COLUMN_NAME)    col_alias\n" +
-                    "    FROM (SELECT DISTINCT P.OBJECT_NAME,REPLACE (REGEXP_SUBSTR (OBJECT_ALIAS,'([^@]+)', 1, 1, NULL,1),'\"',NULL)    OBJECT_ALIAS,\n" +
-                    "                          ROWNUM RN FROM PLAN_TABLE P\n" +
-                    "           WHERE     P.OBJECT_NAME IS NOT NULL AND P.OBJECT_NAME NOT LIKE 'SYS%' AND OBJECT_OWNER <> 'SYS') a, user_tab_columns b\n" +
-                    "   WHERE a.object_name = b.table_name GROUP BY a.object_name, object_alias, rn) " +
-                    "SELECT    'WHERE ('||col||') IN (SELECT DISTINCT ' || col_ALIAS || ' FROM ' || (SELECT LISTAGG (ojn.OBJECT_NAME || ' ' || ojn.OBJECT_ALIAS, ', ')" +
-                    " WITHIN GROUP (ORDER BY ojn.OBJECT_NAME || ' ' || ojn.OBJECT_ALIAS) FROM OBJ_NAME ojn)\n" +
-                    "       || CASE WHEN (SELECT DISTINCT LISTAGG (REPLACE (NVL (ACCESS_PREDICATES, FILTER_PREDICATES),'\"',NULL), ' AND ') WITHIN GROUP (ORDER BY NVL (ACCESS_PREDICATES, FILTER_PREDICATES)) FROM PLAN_TABLE\n" +
-                    "                     WHERE STATEMENT_ID = 'st1' AND NVL (ACCESS_PREDICATES, FILTER_PREDICATES) IS NOT NULL) IS NOT NULL\n" +
-                    "              THEN\n" +
-                    "                     ' WHERE ' || REPLACE((SELECT DISTINCT LISTAGG (REPLACE ( NVL (ACCESS_PREDICATES, FILTER_PREDICATES), '\"', NULL), ' AND ') WITHIN GROUP (ORDER BY NVL (ACCESS_PREDICATES, FILTER_PREDICATES))\n" +
-                    "                        FROM PLAN_TABLE WHERE STATEMENT_ID = 'st1' AND NVL (ACCESS_PREDICATES, FILTER_PREDICATES) IS NOT NULL),'INTERNAL_FUNCTION',NULL)\n" +
-                    "          END || ')'    QUERY1\n" +
-                    "  FROM OBJ_NAME  OJ,\n" +
-                    "       (    SELECT LEVEL     LVL\n" +
-                    "              FROM DUAL\n" +
-                    "        CONNECT BY LEVEL <= (SELECT COUNT (*) FROM OBJ_NAME)) X\n" +
-                    " WHERE OJ.RN = X.LVL";
-            ResultSet rs = st.executeQuery(sql);
-            while(rs.next()){
-                System.out.println(rs.getString(1));
-            }
-*/
-        }
-        builder1.directory(new File(dmpFilePath));
-        builder1.environment().put("ORACLE_HOME", oraPath);
-        builder1.environment().put("PATH", "%ORACLE_HOME%\\BIN;%PATH%");
-
-        builder1.redirectErrorStream(true);
         try {
+            Process p = null;
+            ProcessBuilder builder1 = null;
+            if(copyType.equalsIgnoreCase("TC")){
+                builder1 = new ProcessBuilder(oraPath + "\\BIN\\exp",
+                        user+"/"+password+"@"+fromSid, "tables="+tableName, "file="+jobId+".dmp", "direct=y", "log="+jobId+"_export.txt");
+            }else if(copyType.equalsIgnoreCase("PC")){
+                builder1 = new ProcessBuilder(oraPath + "\\BIN\\exp",
+                        user+"/"+password+"@"+fromSid, "tables="+tableName+":"+partition, "file="+jobId+".dmp", "direct=y", "log="+jobId+"_export.txt");
+                //Suneja's command below
+                /*builder1 = new ProcessBuilder(oraPath + "\\BIN\\expdp",
+                        user+"/"+password+"@"+fromSid, "tables="+tableName+":"+partition, "dumpfile="+tableName+"_"+partition+".dmp", "logfile="+jobId+"_export.txt");*/
+            }else if(copyType.equalsIgnoreCase("CC")){
+                /*Formatter x= new Formatter(dmpFilePath + "\\copy.par");
+                x.format("tables="+tableName);
+                x.format(" file="+jobId+".dmp");
+                x.format(" log="+jobId+"_export.txt");
+                x.format(" query="+textArea);
+                x.close();
+                builder1 = new ProcessBuilder(oraPath + "\\BIN\\exp",
+                        user+"/"+password+"@"+fromSid, "parfile=copy.par");*/
+
+                int customizedCopyCounter=0;
+                Statement objNameSt = conn.createStatement();
+                Statement st = conn.createStatement();
+                st.executeQuery("DELETE FROM PLAN_TABLE WHERE STATEMENT_ID = 'st1'");
+                st.executeUpdate("BEGIN EXECUTE IMMEDIATE 'EXPLAIN PLAN SET STATEMENT_ID = ''st1'' FOR "+textArea+"'; END;");
+                String sql = "WITH OBJ_NAME AS (SELECT a.object_name,object_alias,rn,LISTAGG (b.COLUMN_NAME, ',') WITHIN GROUP (ORDER BY b.COLUMN_NAME)    col,\n" +
+                        "         LISTAGG (object_alias||'.'||b.COLUMN_NAME, ',') WITHIN GROUP (ORDER BY b.COLUMN_NAME)    col_alias\n" +
+                        "    FROM (SELECT DISTINCT P.OBJECT_NAME,REPLACE (REGEXP_SUBSTR (OBJECT_ALIAS,'([^@]+)', 1, 1, NULL,1),'\"',NULL)    OBJECT_ALIAS,\n" +
+                        "                          ROWNUM RN FROM PLAN_TABLE P\n" +
+                        "           WHERE     P.OBJECT_NAME IS NOT NULL AND P.OBJECT_NAME NOT LIKE 'SYS%' AND OBJECT_OWNER <> 'SYS') a, user_tab_columns b\n" +
+                        "   WHERE a.object_name = b.table_name GROUP BY a.object_name, object_alias, rn) " +
+                        "SELECT    'WHERE ('||col||') IN (SELECT DISTINCT ' || col_ALIAS || ' FROM ' || (SELECT LISTAGG (ojn.OBJECT_NAME || ' ' || ojn.OBJECT_ALIAS, ', ')" +
+                        " WITHIN GROUP (ORDER BY ojn.OBJECT_NAME || ' ' || ojn.OBJECT_ALIAS) FROM OBJ_NAME ojn)\n" +
+                        "       || CASE WHEN (SELECT DISTINCT LISTAGG (REPLACE (NVL (ACCESS_PREDICATES, FILTER_PREDICATES),'\"',NULL), ' AND ') WITHIN GROUP (ORDER BY NVL (ACCESS_PREDICATES, FILTER_PREDICATES)) FROM PLAN_TABLE\n" +
+                        "                     WHERE STATEMENT_ID = 'st1' AND NVL (ACCESS_PREDICATES, FILTER_PREDICATES) IS NOT NULL) IS NOT NULL\n" +
+                        "              THEN\n" +
+                        "                     ' WHERE ' || REPLACE((SELECT DISTINCT LISTAGG (REPLACE ( NVL (ACCESS_PREDICATES, FILTER_PREDICATES), '\"', NULL), ' AND ') WITHIN GROUP (ORDER BY NVL (ACCESS_PREDICATES, FILTER_PREDICATES))\n" +
+                        "                        FROM PLAN_TABLE WHERE STATEMENT_ID = 'st1' AND NVL (ACCESS_PREDICATES, FILTER_PREDICATES) IS NOT NULL),'INTERNAL_FUNCTION',NULL)\n" +
+                        "          END || ')'    QUERY1\n" +
+                        "  FROM OBJ_NAME  OJ,\n" +
+                        "       (    SELECT LEVEL     LVL\n" +
+                        "              FROM DUAL\n" +
+                        "        CONNECT BY LEVEL <= (SELECT COUNT (*) FROM OBJ_NAME)) X\n" +
+                        " WHERE OJ.RN = X.LVL";
+                ResultSet objNames=objNameSt.executeQuery("select object_name from obj_name order by object_alias");
+                List<String> objNameList= new ArrayList<String>();
+                String tables="";
+                while(objNames.next()){
+                    objNameList.add(objNames.getString(1));
+                    if("".equalsIgnoreCase(tables)){
+                        tables="IN ('"+objNames.getString(1)+"'";
+                    }else{
+                        tables=tables+",'"+objNames.getString(1)+"'";
+                    }
+                }
+                tables=tables+")";
+                ResultSet rs = st.executeQuery(sql);
+                Formatter x= new Formatter(dmpFilePath + "\\"+jobId+"_export.par");
+                x.format("dumpfile="+jobId+".dmp");
+                x.format(" logfile="+jobId+"_export.txt");
+                x.format(" include=TABLE:\""+tables+"\"");
+                while(rs.next()){
+                    x.format(" query="+objNameList.get(customizedCopyCounter)+":\""+rs.getString(1)+"\"");
+                    customizedCopyCounter++;
+                }
+                x.close();
+                Formatter y= new Formatter(dmpFilePath + "\\"+jobId+"_import.par");
+                y.format("dumpfile="+jobId+".dmp");
+                y.format(" logfile="+jobId+"_export.txt");
+                y.format(" table_exists_action=append");
+                y.format(" remap_schema=demo:hr");
+                y.close();
+                builder1 = new ProcessBuilder(oraPath + "\\BIN\\expdp",
+                        user+"/"+password+"@"+fromSid, "parfile="+jobId+"_export.par", "directory=DCT_DIR");
+
+            }
+            builder1.directory(new File(dmpFilePath));
+            builder1.environment().put("ORACLE_HOME", oraPath);
+            builder1.environment().put("PATH", "%ORACLE_HOME%\\BIN;%PATH%");
+
+            builder1.redirectErrorStream(true);
+
             wb = WorkbookFactory.create(new FileInputStream(excelFilePath));
             Sheet firstSheet = wb.getSheetAt(0);
             Cell cell3 = firstSheet.getRow(jobId).getCell(9);
@@ -170,15 +199,21 @@ public class CopyService {
         }
     }
 
-    public void importData(String toSch, String toPwd, String toDB, int jobId, String toSid){
+    public void importData(String toSch, String toPwd, String toDB, int jobId, String toSid, String copyType){
         try{
             wb = WorkbookFactory.create(new FileInputStream(excelFilePath));
             Sheet firstSheet = wb.getSheetAt(0);
             Cell cell3 = firstSheet.getRow(jobId).getCell(11);
             Cell cell = firstSheet.getRow(jobId).getCell(9);
             Process p = null;
-            ProcessBuilder builder1 = new ProcessBuilder(oraPath + "\\BIN\\imp", toSch+"/"+toPwd+"@"+toSid, "file="+jobId+".dmp",
-                    "full=y", "log="+jobId+"_import.txt", "ignore=y");
+            ProcessBuilder builder1;
+            if ("CC".equalsIgnoreCase(copyType)) {
+                builder1 = new ProcessBuilder(oraPath + "\\BIN\\imp", toSch+"/"+toPwd+"@"+toSid, "file="+jobId+".dmp",
+                        "full=y", "log="+jobId+"_import.txt", "ignore=y");
+            }else{
+                builder1 = new ProcessBuilder(oraPath + "\\BIN\\imp", toSch+"/"+toPwd+"@"+toSid, "file="+jobId+".dmp",
+                        "full=y", "log="+jobId+"_import.txt", "ignore=y");
+            }
             builder1.directory(new File(dmpFilePath));
             builder1.environment().put("ORACLE_HOME", oraPath );
             builder1.environment().put("PATH", "%ORACLE_HOME%\\BIN;%PATH%");
