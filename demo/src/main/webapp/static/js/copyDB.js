@@ -171,11 +171,11 @@ $(document).ready(function(){
         loadTableList();
     });
 
-    $('#copyType').click(function(){
+    $('#copyType').change(function(){
         loadPartition();
     });
 
-    $('#tableName').click(function(){
+    $('#tableName').change(function(){
         loadPartition();
     });
 
