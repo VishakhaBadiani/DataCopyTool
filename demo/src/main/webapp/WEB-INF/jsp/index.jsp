@@ -193,6 +193,7 @@
                             <option value="TC">Table Copy</option>
                             <option value="PC">Partition Copy</option>
                             <option value="CC">Customized Copy</option>
+                            <option value="CX">Complex Copy</option>
                           </select>
                         </div>
                       </td>
