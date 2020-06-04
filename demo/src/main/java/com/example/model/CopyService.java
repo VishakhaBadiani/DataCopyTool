@@ -91,17 +91,7 @@ public class CopyService {
                 //Suneja's command below
                 /*builder1 = new ProcessBuilder(oraPath + "\\BIN\\expdp",
                         user+"/"+password+"@"+fromSid, "tables="+tableName+":"+partition, "dumpfile="+tableName+"_"+partition+".dmp", "logfile="+jobId+"_export.txt");*/
-            }else if(copyType.equalsIgnoreCase("CC")){
-                /*Formatter x= new Formatter(dmpFilePath + "\\copy.par");
-                x.format("tables="+tableName);
-                x.format(" file="+jobId+".dmp");
-                x.format(" log="+jobId+"_export.txt");
-                x.format(" query="+textArea);
-                x.close();
-                builder1 = new ProcessBuilder(oraPath + "\\BIN\\exp",
-                        user+"/"+password+"@"+fromSid, "parfile=copy.par");*/
-
-                int customizedCopyCounter=0;
+            }else if(copyType.equalsIgnoreCase("CX")){
                 Statement st = conn.createStatement();
                 st.executeQuery("DELETE FROM PLAN_TABLE WHERE STATEMENT_ID = 'st1'");
                 st.executeUpdate("BEGIN EXECUTE IMMEDIATE 'EXPLAIN PLAN SET STATEMENT_ID = ''st1'' FOR "+textArea+"'; END;");
@@ -136,7 +126,6 @@ public class CopyService {
                     }else{
                         tablesForExport=tablesForExport+",'"+rs.getString(1)+"'";
                     }
-                    customizedCopyCounter++;
                 }
                 tablesForExport=tablesForExport+")";
                 x.format(" include=TABLE:\""+tablesForExport+"\"");
@@ -144,6 +133,15 @@ public class CopyService {
                 builder1 = new ProcessBuilder(oraPath + "\\BIN\\expdp",
                         user+"/"+password+"@"+fromSid, "parfile="+jobId+"_export.par", "directory=DCT_DIR");
 
+            }else if(copyType.equalsIgnoreCase("CC")){
+                Formatter x= new Formatter(dmpFilePath + "\\"+jobId+"_export.par");
+                x.format("tables="+tableName);
+                x.format(" file="+jobId+".dmp");
+                x.format(" log="+jobId+"_export.txt");
+                x.format(" query=\""+textArea+"\"");
+                x.close();
+                builder1 = new ProcessBuilder(oraPath + "\\BIN\\exp",
+                        user+"/"+password+"@"+fromSid, "parfile="+jobId+"_export.par");
             }
             builder1.directory(new File(dmpFilePath));
             builder1.environment().put("ORACLE_HOME", oraPath);
@@ -195,7 +193,7 @@ public class CopyService {
             Cell cell = firstSheet.getRow(jobId).getCell(9);
             Process p = null;
             ProcessBuilder builder1;
-            if ("CC".equalsIgnoreCase(copyType)) {
+            if ("CX".equalsIgnoreCase(copyType)) {
                 Formatter y= new Formatter(dmpFilePath + "\\"+jobId+"_import.par");
                 y.format("dumpfile="+jobId+".dmp");
                 y.format(" logfile="+jobId+"_import.txt");

@@ -49,6 +49,11 @@ $(document).ready(function(){
             $('#part').hide();
             $('#Qry').show();
         }
+        if(ctype=='CX'){
+            $('#part').hide();
+            $('#tableName').prop('disabled',true);
+            $('#Qry').show();
+        }
     });
     /* $('#fPWD').keydown(function(event){
         var keycode = (event.keyCode ? event.keyCode : event.which);
@@ -199,7 +204,7 @@ $(document).ready(function(){
                 return false;
             }
 
-            if(tableName==''){
+            if(tableName=='' && copyType!='CX'){
                 alert('Please select table Name!');
                 return false;
             }
